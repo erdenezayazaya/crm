@@ -1,0 +1,11 @@
+
+/**
+ * 
+ */
+public enum TypeSale {
+    HEALTHINSURANCE,
+    CARINSURANCE,
+    HOMEINSURANCE,
+    LIFEINSURANCE,
+    DISABILITYINSURANCE
+}
