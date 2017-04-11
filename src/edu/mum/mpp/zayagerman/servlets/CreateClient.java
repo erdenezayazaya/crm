@@ -1,4 +1,4 @@
-package edu.mum.mpp.zayagerman;
+package edu.mum.mpp.zayagerman.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
