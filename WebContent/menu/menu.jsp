@@ -7,8 +7,7 @@
   <meta name="keywords" content="enter your keywords here" />
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" type="text/css" href="../css/style.css" />
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-  <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript" src="../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
   <script type="text/javascript" src="../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
   <link rel="stylesheet" type="text/css" href="../fancybox/jquery.fancybox-1.3.4.css" media="screen" />

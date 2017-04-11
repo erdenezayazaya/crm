@@ -30,29 +30,24 @@ public class CreateClient extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		
+		String action = request.getParameter("action");
+		
+		if(action.equals("listLeads")){
+			listLeads(request, response);
+		}
+		
 		PrintWriter out = response.getWriter();
 		out.println("TestServlet says hi<br/>");
 		
 		/*
-		 * Retrieve Client information
+		 * Create Client information
 		 */
-		/*
-		ClientData client = new ClientData();
-		client.setClientFirstName(request.getParameter("clientFirstName"));
-		client.setClientLastName(request.getParameter("clientLastName"));
-		client.setClientEmail(request.getParameter("clientEmail"));
 		
-		client.setLeadAmount(Double.parseDouble(request.getParameter("LeadAmount")));
-		client.setLeadSource(request.getParameter("leadSource"));
-		client.setLeadStatus(request.getParameter("leadStatus"));
-		client.setLeadIndustry(request.getParameter("leadIndustry"));
-		client.setLeadDescription(request.getParameter("leadDescription"));
+		if(action.equals("createLead")){
+			createClient(request, response);
+		}
 		
-		ClientService.createClient(ClientType.LEAD, client);
-		*/
-		response.sendRedirect("modules/success.jsp");
-		//RequestDispatcher rd = request.getRequestDispatcher("modules/success.jsp");
-		//rd.forward(request, response);
 		
 		//HttpSession session = request.getSession();
 		//session.setAttribute("test1", "testvalue");
@@ -69,5 +64,47 @@ public class CreateClient extends HttpServlet {
 		//doGet(request, response);
 		return;
 	}
-
+	
+	private void listLeads(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String text = "******************";
+		response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+	    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+	    response.getWriter().write(text); 
+	}
+	
+	private void createClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ClientData client = new ClientData();
+		client.setClientFirstName(request.getParameter("clientFirstName"));
+		client.setClientLastName(request.getParameter("clientLastName"));
+		client.setClientEmail(request.getParameter("clientEmail"));
+		
+		client.setLeadAmount(3.0);
+		//client.setLeadAmount(Double.parseDouble(request.getParameter("LeadAmount")));
+		client.setLeadSource(request.getParameter("leadSource"));
+		client.setLeadStatus(request.getParameter("leadStatus"));
+		client.setLeadIndustry(request.getParameter("leadIndustry"));
+		client.setLeadDescription(request.getParameter("leadDescription"));
+		
+		ClientService.createClient(ClientType.LEAD, client);
+		
+		//response.sendRedirect("modules/success.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("modules/success.jsp");
+		rd.forward(request, response);
+	}
+	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter out = response.getWriter();
+		out.println("TestServlet says hi GET<br/>");
+		
+		String action = request.getParameter("action");
+		
+		if(action.equals("listLeads")){
+			listLeads(request, response);
+		}
+	}
 }

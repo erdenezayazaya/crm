@@ -1,3 +1,5 @@
+package edu.mum.mpp.zayagerman.client;
+
 
 import java.util.*;
 
@@ -10,6 +12,7 @@ public final class Opportunity extends Client {
      * Default constructor
      */
     public Opportunity() {
+    	super("", "", "");
     }
 
     /**

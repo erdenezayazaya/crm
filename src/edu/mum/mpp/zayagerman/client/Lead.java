@@ -14,13 +14,13 @@ public class Lead extends Client {
 		super(firstName, lastName, email);
 		
 		
-		if (source.equals("")) {
+		if (source.equals("") || source.equals(null)) {
 			this.source = "";
 		} else {
 			this.source = source;
 		}
 		
-		if (status.equals("")) {
+		if (status.equals("") || status.equals(null)) {
 			this.status = "";
 		} else {
 			this.status = source;
@@ -28,14 +28,14 @@ public class Lead extends Client {
 		
 		this.amount = amount;
 		
-		if (industry.equals("")) {
+		if (industry.equals("") || industry.equals(null)) {
 			this.industry = "";
 		} else {
 			this.industry = source;
 		}
 		
 		
-		if (description.equals("")) {
+		if (description.equals("") || description.equals(null)) {
 			this.description = "";
 		} else {
 			this.description = source;
