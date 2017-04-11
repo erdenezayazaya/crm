@@ -1,7 +1,9 @@
 package edu.mum.mpp.zayagerman.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +29,14 @@ public class CreateClient extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.println("TestServlet says hi<br/>");
+		
 		/*
 		 * Retrieve Client information
 		 */
+		/*
 		ClientData client = new ClientData();
 		client.setClientFirstName(request.getParameter("clientFirstName"));
 		client.setClientLastName(request.getParameter("clientLastName"));
@@ -39,9 +46,13 @@ public class CreateClient extends HttpServlet {
 		client.setLeadSource(request.getParameter("leadSource"));
 		client.setLeadStatus(request.getParameter("leadStatus"));
 		client.setLeadIndustry(request.getParameter("leadIndustry"));
-		client.setLeadDescription(request.getParameter("LeadDescription"));
+		client.setLeadDescription(request.getParameter("leadDescription"));
 		
 		ClientService.createClient(ClientType.LEAD, client);
+		*/
+		response.sendRedirect("modules/success.jsp");
+		//RequestDispatcher rd = request.getRequestDispatcher("modules/success.jsp");
+		//rd.forward(request, response);
 		
 		//HttpSession session = request.getSession();
 		//session.setAttribute("test1", "testvalue");
@@ -55,7 +66,8 @@ public class CreateClient extends HttpServlet {
 		//Create parameters in init
 		//
 		
-		doGet(request, response);
+		//doGet(request, response);
+		return;
 	}
 
 }
