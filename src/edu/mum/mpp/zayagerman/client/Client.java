@@ -1,42 +1,51 @@
-
-import java.util.*;
+package edu.mum.mpp.zayagerman.client;
 
 /**
  * 
  */
 public abstract class Client {
 
-    /**
-     * Default constructor
-     */
-    public Client() {
-    }
+	/**
+	 * Default constructor
+	 */
+	public Client(String firstName, String lastName, String email) {
+		if (firstName.equals("")) {
+			this.firstName = "";
+		} else {
+			this.firstName = firstName;
+		}
 
-    /**
-     * 
-     */
-    private int id;
+		if (lastName.equals("")) {
+			this.lastName = "";
+		} else {
+			this.lastName = lastName;
+		}
 
-    /**
-     * 
-     */
-    private String firstName;
+		if (email.equals("")) {
+			this.email = "";
+		} else {
+			this.email = email;
+		}
+	}
 
-    /**
-     * 
-     */
-    private String lastName;
+	/**
+	 * 
+	 */
+	private int id;
 
-    /**
-     * 
-     */
-    private String email;
+	/**
+	 * 
+	 */
+	private String firstName;
 
+	/**
+	 * 
+	 */
+	private String lastName;
 
-
-
-
-
-
+	/**
+	 * 
+	 */
+	private String email;
 
 }

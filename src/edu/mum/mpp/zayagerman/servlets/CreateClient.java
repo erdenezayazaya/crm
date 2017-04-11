@@ -12,6 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.sun.net.httpserver.HttpContext;
 
+import edu.mum.mpp.zayagerman.client.ClientFactory.ClientType;
+import edu.mum.mpp.zayagerman.dto.ClientData;
+import edu.mum.mpp.zayagerman.services.ClientService;
+
 /**
  * Servlet implementation class CreateClient
  */
@@ -19,19 +23,25 @@ import com.sun.net.httpserver.HttpContext;
 public class CreateClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
+		/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		/*
+		 * Retrieve Client information
+		 */
+		ClientData client = new ClientData();
+		client.setClientFirstName(request.getParameter("clientFirstName"));
+		client.setClientLastName(request.getParameter("clientLastName"));
+		client.setClientEmail(request.getParameter("clientEmail"));
+		
+		client.setLeadAmount(Double.parseDouble(request.getParameter("LeadAmount")));
+		client.setLeadSource(request.getParameter("leadSource"));
+		client.setLeadStatus(request.getParameter("leadStatus"));
+		client.setLeadIndustry(request.getParameter("leadIndustry"));
+		client.setLeadDescription(request.getParameter("LeadDescription"));
+		
+		ClientService.createClient(ClientType.LEAD, client);
 		
 		//HttpSession session = request.getSession();
 		//session.setAttribute("test1", "testvalue");
