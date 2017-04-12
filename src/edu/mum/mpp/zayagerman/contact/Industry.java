@@ -1,26 +1,36 @@
+package edu.mum.mpp.zayagerman.contact;
 
-import java.util.*;
+import javax.persistence.Embeddable;
 
-/**
- * 
- */
+@Embeddable
 public class Industry {
 
-    /**
-     * Default constructor
-     */
-    public Industry() {
-    }
-
-    /**
-     * 
-     */
     private String name;
-
-    /**
-     * 
-     */
     private boolean state;
 
+    public Industry() {
+    }
+    
 
+	public Industry(String name, boolean state) {
+		super();
+		this.name = name;
+		this.state = state;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}    
 }

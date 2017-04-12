@@ -1,43 +1,78 @@
 
-import java.util.*;
+package edu.mum.mpp.zayagerman.campaign;
 
-/**
- * 
- */
+import java.time.LocalDate;
+import javax.persistence.*;
+
+@Entity
+@Table(name="Campaign")
 public class Campaign {
 
-    /**
-     * Default constructor
-     */
+	@Id @GeneratedValue
+	@Column(name = "id")
+    public int id;
+	
+	@Column(name = "name")
+    public String name;
+	
+	@Column(name = "date")
+    public LocalDate date;
+	
+	@Column(name = "details")
+    public String details;
+	
+	@Column(name = "state")
+    public boolean state;
+    
     public Campaign() {
     }
+    
+	public Campaign(int id, String name, LocalDate date, String details, boolean state) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.date = date;
+		this.details = details;
+		this.state = state;
+	}
+	
+	public int getId() {
+		return id;
+	}
 
-    /**
-     * 
-     */
-    public int id;
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    /**
-     * 
-     */
-    public String name;
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * 
-     */
-    public Date date;
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * 
-     */
-    public String details;
+	public LocalDate getDate() {
+		return date;
+	}
 
-    /**
-     * 
-     */
-    public boolean state;
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
+	public String getDetails() {
+		return details;
+	}
 
+	public void setDetails(String details) {
+		this.details = details;
+	}
 
+	public boolean isState() {
+		return state;
+	}
 
+	public void setState(boolean state) {
+		this.state = state;
+	}
 }

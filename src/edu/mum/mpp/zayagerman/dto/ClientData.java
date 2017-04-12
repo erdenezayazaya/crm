@@ -1,5 +1,6 @@
 package edu.mum.mpp.zayagerman.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ClientData {
@@ -15,7 +16,7 @@ public class ClientData {
 	private String OpporStage;
 	private double OpporAmount;
 	private int OpporProbability;
-	private Date OpporCloseDate;
+	private LocalDate OpporCloseDate;
 	private String OpporDescription;
 	private String AddType;
 	private String AddAddress;
@@ -95,10 +96,10 @@ public class ClientData {
 	public void setOpporProbability(int opporProbability) {
 		OpporProbability = opporProbability;
 	}
-	public Date getOpporCloseDate() {
+	public LocalDate getOpporCloseDate() {
 		return OpporCloseDate;
 	}
-	public void setOpporCloseDate(Date opporCloseDate) {
+	public void setOpporCloseDate(LocalDate opporCloseDate) {
 		OpporCloseDate = opporCloseDate;
 	}
 	public String getOpporDescription() {
