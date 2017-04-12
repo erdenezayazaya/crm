@@ -88,8 +88,6 @@ public class ManageSale extends HttpServlet {
 		LocalDate today = LocalDate.now();
 		List<Sale> listSales = new ArrayList<>();
 		listSales.add(new Sale(1, TypeSale.CARINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.CARINSURANCE.percentage(), today, client));
-
-		//public Sale(int idSale, String typeSale, double amount, int percentGain, double amountGain, LocalDate dateSale, ClientBasic clientBasic) {
 			
 		String json = new Gson().toJson(listSales);
 		

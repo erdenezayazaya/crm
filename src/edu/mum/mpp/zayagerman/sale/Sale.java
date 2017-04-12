@@ -20,7 +20,7 @@ public class Sale {
     private double amount;
 	
 	@Column(name = "percentGain")
-    private int percentGain;
+    private double percentGain;
 	
 	@Column(name = "amountGain")
     private double amountGain;
@@ -34,7 +34,7 @@ public class Sale {
     public Sale() {
     }
     
-	public Sale(int idSale, TypeSale typeSale, double amount, int percentGain, double amountGain, LocalDate dateSale, ClientBasic clientBasic) {
+	public Sale(int idSale, TypeSale typeSale, double amount, double percentGain, double amountGain, LocalDate dateSale, ClientBasic clientBasic) {
 		super();
 		this.idSale = idSale;
 		this.typeSale = typeSale;
@@ -69,11 +69,11 @@ public class Sale {
 		this.amount = amount;
 	}
 	
-	public int getPercentGain() {
+	public double getPercentGain() {
 		return percentGain;
 	}
 	
-	public void setPercentGain(int percentGain) {
+	public void setPercentGain(double percentGain) {
 		this.percentGain = percentGain;
 	}
 	
