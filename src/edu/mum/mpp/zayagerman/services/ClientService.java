@@ -14,7 +14,7 @@ public class ClientService {
 		return ClientFactory.createClient(type, client);
 	}
 	
-	public ClientBasic getclient(int id){
+	public static ClientBasic getclient(int id){
 		return ClientFactory.getClient(id);
 	}
 	

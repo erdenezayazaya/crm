@@ -7,10 +7,31 @@
 
 
 <script type="text/javascript" class="init">
+
 $(document).ready(function() {
+    $('#tableSales').DataTable( {
+        "ajax": '../ManageSale?action=list', 
+        "aoColumns": [
+        	{ "data": "idSale" },
+            { "data": "typeSale" },
+            { "data": "amount" },
+            { "data": "percentGain" },
+            { "data": "amountGain" },
+            { "data":  function (data, type, dataToSet) {
+                		return data.year;
+            			}}
+            ],
+            "columnDefs": [
+                {
+                    "targets": [ 1 ],
+                    "visible": true,
+                    "searchable": false
+                }]
+    } );
+    
     $('#tableOppor').DataTable( {
-	
-        "ajax": '../CreateClient?action=listOpportunities',
+    	
+        "ajax": '../ManageOpportunity?action=list',
         "columns": [
         	{ "data": "id" },
             { "data": "firstName" },
@@ -29,36 +50,38 @@ $(document).ready(function() {
                     "searchable": false
                 }]
     } );
-} );
-
-
-$(document).ready(function() {
-    $('#tableSales').DataTable( {
-	
-        "ajax": '../SalesManagement?action=list',
-        "columns": [
-            { "data": "id" },
-            { "data": "typeSale" },
-            { "data": "amount" },
-            { "data": "percentGain" },
-            { "data": "amountGain" },
-            { "data": "dateSale" }
-            ],
-         "columnDefs": [
-             {
-                 "targets": [ 1 ],
-                 "visible": false,
-                 "searchable": false
-             }]
+    
+    
+    var tableOppor = $('#tableOppor').DataTable();
+    $('#tableOppor tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+            
+            
+        }
+        else {
+        	tableOppor.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            $("#clientFullName").val(tableOppor.row( this ).data().firstName + " " + tableOppor.row( this ).data().lastName);
+            $("#idClient").val(tableOppor.row( this ).data().id);
+        }
+        
+        
     } );
+    
+    
+    
+    
+    
+    
 } );
 
-//Select row of opprtunity
-var tableOppor = $('#tableOppor').DataTable();
+
+
  
-$('#tableOppor tbody').on( 'click', 'tr', function () {
-    console.log( table.row( this ).data() );
-} );
+//$('#tableOppor tbody').on( 'click', 'tr', function () {
+    //console.log( table.row( this ).data() );
+//} );
 
 </script>
 
@@ -74,6 +97,7 @@ $('#tableOppor tbody').on( 'click', 'tr', function () {
 			<table id="tableOppor" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
+			            	<th>Id</th>
 			                <th>First Name</th>
 			                <th>Last Name</th>
 			                <th>Email</th>
@@ -87,16 +111,12 @@ $('#tableOppor tbody').on( 'click', 'tr', function () {
 			        
 			    </table>
 
-				
-				
-				
-				
-				
-				
-				
+
 				<form name="clientCreation" action="../CreateClient" method="post">
 					<h3>Create New Sale</h3>
-
+							
+							<label class="" for="firstname">Client Name: </label> 
+							<input class="" type="text" name="clientFullName" id="clientFullName" readonly ><br>
 							<label class="" for="firstname">Type Sale: </label> 
 							<select name="typeSale">
 							  <option value="HEALTHINSURANCE">Health Insurance</option>
@@ -115,8 +135,8 @@ $('#tableOppor tbody').on( 'click', 'tr', function () {
 							<input type="submit" value="submit" />
 							<!-- Action -->	
 							<input  type="hidden" value="create" name="action">
-							<!-- Value of Id Client -->
-							<input  type="text" value="" name="idClient">
+							<!-- Value of Id Client --><br>
+							<input  type="text" value="" name="idClient" id="idClient" readOnly>
 							<br>
 				</form>
 				<br>
@@ -125,6 +145,7 @@ $('#tableOppor tbody').on( 'click', 'tr', function () {
 			<table id="tableSales" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
+			            	<th>Id</th>
 			                <th>Type</th>
 			                <th>Amount</th>
 			                <th>Percent Gain</th>
@@ -134,6 +155,7 @@ $('#tableOppor tbody').on( 'click', 'tr', function () {
 			        </thead>
 			        <tfoot>
 			            <tr>
+			            	<th>Id</th>
 			                <th>Type</th>
 			                <th>Amount</th>
 			                <th>Percent Gain</th>

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public final class ClientOpportunity extends Client {
 
 	@Column(name = "stage")
-    private String stage;
+    private Stage stage;
 	
 	@Column(name = "amount")
     private double amount;
@@ -26,8 +26,8 @@ public final class ClientOpportunity extends Client {
 		super();
 	}
 
-	public ClientOpportunity(String stage, double amount, int probability, LocalDate closeDate, String description) {
-		super();
+	public ClientOpportunity(int id, String firstName, String lastName, String email, Stage stage, double amount, int probability, LocalDate closeDate, String description) {
+		super(id, firstName, lastName, email);
 		this.stage = stage;
 		this.amount = amount;
 		this.probability = probability;
@@ -39,7 +39,7 @@ public final class ClientOpportunity extends Client {
 		return stage;
 	}
 	
-	public void setStage(String stage) {
+	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 	

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import edu.mum.mpp.zayagerman.client.ClientBasic;
+import edu.mum.mpp.zayagerman.client.ClientOpportunity;
 import edu.mum.mpp.zayagerman.client.ClientType;
+import edu.mum.mpp.zayagerman.client.Stage;
 import edu.mum.mpp.zayagerman.dto.ClientData;
+import edu.mum.mpp.zayagerman.sale.Sale;
+import edu.mum.mpp.zayagerman.sale.TypeSale;
 import edu.mum.mpp.zayagerman.services.ClientService;
 
 /**
@@ -35,7 +43,7 @@ public class ManageOpportunity extends HttpServlet {
 
 		String action = request.getParameter("action");
 
-		if (action.equals("listLeads")) {
+		if (action.equals("list")) {
 			listOpportunities(request, response);
 		}
 
@@ -43,7 +51,7 @@ public class ManageOpportunity extends HttpServlet {
 		 * Create Client information
 		 */
 
-		if (action.equals("createLead")) {
+		if (action.equals("create")) {
 			try {
 				createOpportunity(request, response);
 			} catch (ParseException e) {
@@ -60,7 +68,7 @@ public class ManageOpportunity extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 
-		if (action.equals("listLeads")) {
+		if (action.equals("list")) {
 			listOpportunities(request, response);
 		}
 
@@ -68,7 +76,7 @@ public class ManageOpportunity extends HttpServlet {
 		 * Create Client information
 		 */
 
-		if (action.equals("createLead")) {
+		if (action.equals("create")) {
 			try {
 				createOpportunity(request, response);
 			} catch (ParseException e) {
@@ -81,7 +89,21 @@ public class ManageOpportunity extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
-		String json = new Gson().toJson(ClientService.getOportunities());
+		//String json = new Gson().toJson(ClientService.getOportunities());
+		/*
+		 * Temporal
+		 */
+	
+		LocalDate today = LocalDate.now();
+		List<ClientOpportunity> listOppor = new ArrayList<>();
+		listOppor.add(new ClientOpportunity(1, "German", "Segura", " gsegura@gmail.com", Stage.NEGOTIATION, 5000.00, 10, today, "Description1"));
+		listOppor.add(new ClientOpportunity(2, "John", "McQuin", " john@gmail.com", Stage.NEGOTIATION, 5000.00, 20, today, "Description2"));
+		listOppor.add(new ClientOpportunity(3, "Bruce", "Lee", " lee@gmail.com", Stage.NEGOTIATION, 5000.00, 25, today, "Description3"));
+		listOppor.add(new ClientOpportunity(4, "Jet Li", "Segura", " jet@gmail.com", Stage.NEGOTIATION, 5000.00, 80, today, "Description4"));
+		String json = new Gson().toJson(listOppor);
+		
+		
+		
 		response.getWriter().write("{ \"data\":" + json + " }");
 	}
 

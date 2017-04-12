@@ -10,7 +10,7 @@
 $(document).ready(function() {
     $('#tableLeads').DataTable( {
 	
-        "ajax": '../CreateClient?action=listOpportunities',
+        "ajax": '../ManageOpportunity?action=list',
         "columns": [
         	{ "data": "id" },
             { "data": "firstName" },
@@ -91,7 +91,7 @@ $(document).ready(function() {
 							<input class="" type="text" name="OpporDescription" ><br>
 
 							<input type="submit" value="submit" />	
-							<input class="" type="hidden" value="createLead" name="action"><br>
+							<input class="" type="hidden" value="create" name="action"><br>
 				</form>
 				<br>
 
@@ -99,6 +99,7 @@ $(document).ready(function() {
 			<table id="tableLeads" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
+			                <th>Id</th>
 			                <th>First Name</th>
 			                <th>Last Name</th>
 			                <th>Email</th>
@@ -111,6 +112,7 @@ $(document).ready(function() {
 			        </thead>
 			        <tfoot>
 			            <tr>
+			            	<th>Id</th>
 			                <th>First Name</th>
 			                <th>Last Name</th>
 			                <th>Email</th>

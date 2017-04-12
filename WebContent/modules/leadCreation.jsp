@@ -13,7 +13,7 @@ $(document).ready(function() {
 	
         "ajax": '../CreateClient?action=listLeads',
         "columns": [
-        	{ "data": "id" },
+        	{ "data": "ids" },
             { "data": "firstName" },
             { "data": "lastName" },
             { "data": "email" },
@@ -76,6 +76,7 @@ $(document).ready(function() {
 			<table id="tableLeads" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
+			             	<th>Id</th>
 			                <th>First Name</th>
 			                <th>Last Name</th>
 			                <th>Email</th>
@@ -88,6 +89,7 @@ $(document).ready(function() {
 			        </thead>
 			        <tfoot>
 			            <tr>
+			            	<th>Id</th>
 			                <th>First Name</th>
 			                <th>Last Name</th>
 			                <th>Email</th>
