@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 import edu.mum.mpp.zayagerman.dto.ClientData;
@@ -101,10 +102,10 @@ public class ClientFactory {
 
     public static boolean createClient(ClientType type, ClientData client) {
     	
-    	Configuration config = new Configuration();
-    	config.configure("hibernate.cfg.xml");
-    	
-    	SessionFactory factory = config.buildSessionFactory();
+  /*  	Configuration config = new Configuration();
+    	config.configure("hibernate.cfg.xml");*/
+ 
+    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
     	Session session = factory.openSession();
     	
     	Transaction transaction=session.beginTransaction();  
