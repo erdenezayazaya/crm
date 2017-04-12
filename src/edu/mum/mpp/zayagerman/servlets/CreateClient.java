@@ -1,21 +1,18 @@
 package edu.mum.mpp.zayagerman.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.google.gson.Gson;
-import com.sun.net.httpserver.HttpContext;
-
-import edu.mum.mpp.zayagerman.client.ClientFactory.ClientType;
+import edu.mum.mpp.zayagerman.client.ClientType;
+import edu.mum.mpp.zayagerman.client.ClientLead;
 import edu.mum.mpp.zayagerman.dto.ClientData;
 import edu.mum.mpp.zayagerman.services.ClientService;
 
@@ -37,10 +34,7 @@ public class CreateClient extends HttpServlet {
 		if(action.equals("listLeads")){
 			listLeads(request, response);
 		}
-		
-		//PrintWriter out = response.getWriter();
-		//out.println("TestServlet says hi<br/>");
-		
+
 		/*
 		 * Create Client information
 		 */
@@ -50,19 +44,7 @@ public class CreateClient extends HttpServlet {
 		}
 		
 		
-		//HttpSession session = request.getSession();
-		//session.setAttribute("test1", "testvalue");
-		//session.getAttribute("test1");
 		
-		//Context
-		//ServletContext context = request.getServletContext();
-		//context.setAttribute(arg0, arg1);
-		
-		//init
-		//Create parameters in init
-		//
-		
-		//doGet(request, response);
 		return;
 	}
 	
@@ -70,6 +52,20 @@ public class CreateClient extends HttpServlet {
 		response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
 	    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
 	    
+	    /*
+	     * TEMPORAL
+	     */
+	    List<ClientLead> leads = new ArrayList<ClientLead>();
+	    /*
+		leads.add(new ClientLead("German", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new ClientLead("Charlei", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new ClientLead("Zaya", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new ClientLead("Tom", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new ClientLead("John", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+	    */
+	    /*
+	     * 
+	     */
 	    
 	    String json = new Gson().toJson(ClientService.getLeads() );
 	    response.getWriter().write("{ \"data\":"   + json + " }"); 
