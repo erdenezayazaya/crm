@@ -12,6 +12,7 @@ $(document).ready(function() {
 	
         "ajax": '../CreateClient?action=listOpportunities',
         "columns": [
+        	{ "data": "id" },
             { "data": "firstName" },
             { "data": "lastName" },
             { "data": "email" },
@@ -20,7 +21,13 @@ $(document).ready(function() {
             { "data": "probability" },
             { "data": "closeDate" },
             { "data": "description" }
-            ]
+            ],
+            "columnDefs": [
+                {
+                    "targets": [ 1 ],
+                    "visible": false,
+                    "searchable": false
+                }]
     } );
 } );
 </script>

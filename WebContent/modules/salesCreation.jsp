@@ -8,6 +8,31 @@
 
 <script type="text/javascript" class="init">
 $(document).ready(function() {
+    $('#tableOppor').DataTable( {
+	
+        "ajax": '../CreateClient?action=listOpportunities',
+        "columns": [
+        	{ "data": "id" },
+            { "data": "firstName" },
+            { "data": "lastName" },
+            { "data": "email" },
+            { "data": "stage" },
+            { "data": "amount" },
+            { "data": "probability" },
+            { "data": "closeDate" },
+            { "data": "description" }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [ 1 ],
+                    "visible": false,
+                    "searchable": false
+                }]
+    } );
+} );
+
+
+$(document).ready(function() {
     $('#tableSales').DataTable( {
 	
         "ajax": '../SalesManagement?action=list',
@@ -18,9 +43,23 @@ $(document).ready(function() {
             { "data": "percentGain" },
             { "data": "amountGain" },
             { "data": "dateSale" }
-            ]
+            ],
+         "columnDefs": [
+             {
+                 "targets": [ 1 ],
+                 "visible": false,
+                 "searchable": false
+             }]
     } );
 } );
+
+//Select row of opprtunity
+var tableOppor = $('#tableOppor').DataTable();
+ 
+$('#tableOppor tbody').on( 'click', 'tr', function () {
+    console.log( table.row( this ).data() );
+} );
+
 </script>
 
 
@@ -30,6 +69,31 @@ $(document).ready(function() {
 			<div class="content_item">
 				<div style="width:600px; float:left;">
 				<br>
+				
+							<h3>Opportunities</h3>
+			<table id="tableOppor" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>First Name</th>
+			                <th>Last Name</th>
+			                <th>Email</th>
+			                <th>Stage</th>
+			                <th>Amount</th>
+			                <th>Probability</th>
+			                <th>Close Date</th>
+			                <th>Description</th>
+			            </tr>
+			        </thead>
+			        
+			    </table>
+
+				
+				
+				
+				
+				
+				
+				
 				<form name="clientCreation" action="../CreateClient" method="post">
 					<h3>Create New Sale</h3>
 
@@ -45,55 +109,19 @@ $(document).ready(function() {
 							<label class="" for="firstname">Amount: </label> 
 							<input class="" type="number" name="OpporAmount" min="1" max="1000000" required><br>
 
-							<label class="" for="firstname">Percentage Sale: </label> 
-							<select name="OpporProbability">
-							  <option value="0">0%</option>
-							  <option value="10">10%</option>
-							  <option value="20">20%</option>
-							  <option value="30">30%</option>
-							  <option value="40">40%</option>
-							  <option value="50">50%</option>
-							  <option value="60">60%</option>
-							  <option value="70">70%</option>
-							  <option value="80">80%</option>
-							  <option value="90">90%</option>
-							  <option value="100">100%</option>
-							  
-							</select>
-							<label class="" for="lastname">Last name: </label> 
-							<input class="" type="text" name="clientLastName" required><br>
-
-							<label class="" for="lastname">Enter email </label> 
-							<input class="" type="email" name="clientEmail" required placeholder="email@example.com" /><br /> 
-
-							<label class="" for="firstname">Stage: </label> 
-							<select name="OpporStage">
-							
-							  <option value="0">Prospecting</option>
-							  <option value="10">Need Analysis</option>
-							  <option value="20">Proposal</option>
-							  <option value="30">Negotiation</option>
-							  <option value="30">Closed Won</option>
-							  <option value="30">Closed Lost</option>
-							  </select>
-							<br>
-							
-
-							
-							<br>
-
 							<label class="" for="firstname">Close Date: </label> 
-							<input class="" type="date" name="OpporCloseDate" ><br>
+							<input class="" type="date" name="dateSale" ><br>
 
-							<label class="" for="firstname">Description: </label> 
-							<input class="" type="text" name="OpporDescription" ><br>
-
-							<input type="submit" value="submit" />	
-							<input class="" type="hidden" value="createLead" name="action"><br>
+							<input type="submit" value="submit" />
+							<!-- Action -->	
+							<input  type="hidden" value="create" name="action">
+							<!-- Value of Id Client -->
+							<input  type="text" value="" name="idClient">
+							<br>
 				</form>
 				<br>
 
-			<h3>Opportunities</h3>
+			<h3>Sales</h3>
 			<table id="tableSales" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>

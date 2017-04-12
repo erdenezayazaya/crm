@@ -13,6 +13,7 @@ $(document).ready(function() {
 	
         "ajax": '../CreateClient?action=listLeads',
         "columns": [
+        	{ "data": "id" },
             { "data": "firstName" },
             { "data": "lastName" },
             { "data": "email" },
@@ -21,7 +22,13 @@ $(document).ready(function() {
             { "data": "amount" },
             { "data": "industry" },
             { "data": "description" }
-            ]
+            ],
+            "columnDefs": [
+                {
+                    "targets": [ 1 ],
+                    "visible": false,
+                    "searchable": false
+                }]
     } );
 } );
 </script>
