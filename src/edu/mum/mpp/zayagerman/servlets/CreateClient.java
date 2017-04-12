@@ -91,7 +91,7 @@ public class CreateClient extends HttpServlet {
 		ClientService.createClient(ClientType.LEAD, client);
 		
 		//response.sendRedirect("modules/success.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("modules/success.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
 		rd.forward(request, response);
 	}
 	

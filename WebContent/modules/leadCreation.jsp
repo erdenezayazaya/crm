@@ -64,7 +64,7 @@ $(document).ready(function() {
 							<input class="" type="text" name="leadDescription" required><br>
 
 							<input type="submit" value="submit" />	
-							<input class="" type="hidden" name="createLead" ><br>
+							<input class="" type="hidden" value="createLead" name="action"><br>
 				</form>
 				<br>
 
