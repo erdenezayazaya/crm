@@ -1,33 +1,42 @@
 package edu.mum.mpp.zayagerman.services;
 
-import java.util.List;
-import edu.mum.mpp.zayagerman.client.ClientBasic;
+import java.util.*;
+
+
 import edu.mum.mpp.zayagerman.client.ClientFactory;
-import edu.mum.mpp.zayagerman.client.ClientLead;
-import edu.mum.mpp.zayagerman.client.ClientOpportunity;
-import edu.mum.mpp.zayagerman.client.ClientType;
+import edu.mum.mpp.zayagerman.client.ClientFactory.ClientType;
+import edu.mum.mpp.zayagerman.client.Lead;
+import edu.mum.mpp.zayagerman.client.Opportunity;
 import edu.mum.mpp.zayagerman.dto.ClientData;
 
+
 public class ClientService {
-	
 	public static boolean createClient(ClientType type, ClientData client){
 		return ClientFactory.createClient(type, client);
 	}
 	
-	public static ClientBasic getClient(int id){
-		return ClientFactory.getClient(id);
+	public ClientData getclient(int id){
+		
+		return null;
 	}
 	
-	public static List<ClientBasic> getClientBasics()
-	{
-		return ClientFactory.getClientBasics();
+	public static List<Lead> getLeads(){
+		
+		List<Lead> leads = new ArrayList<Lead>();
+		leads.add(new Lead("German", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new Lead("Charlei", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new Lead("Zaya", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new Lead("Tom", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		leads.add(new Lead("John", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
+		
+		
+		
+		return leads;
 	}
 	
-	public static List<ClientLead> getLeads(){
-		return ClientFactory.getLeads();
+	public List<Opportunity> getOportunities(){
+		return null;
 	}
 	
-	public static List<ClientOpportunity> getOportunities(){
-		return ClientFactory.getOportunities();
-	}
+	
 }

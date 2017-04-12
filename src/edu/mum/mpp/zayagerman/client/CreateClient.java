@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import edu.mum.mpp.zayagerman.client.ClientType;
+import com.google.gson.Gson;
+import com.sun.net.httpserver.HttpContext;
+
+import edu.mum.mpp.zayagerman.client.ClientFactory.ClientType;
 import edu.mum.mpp.zayagerman.dto.ClientData;
 import edu.mum.mpp.zayagerman.services.ClientService;
 
@@ -33,8 +38,8 @@ public class CreateClient extends HttpServlet {
 			listLeads(request, response);
 		}
 		
-		PrintWriter out = response.getWriter();
-		out.println("TestServlet says hi<br/>");
+		//PrintWriter out = response.getWriter();
+		//out.println("TestServlet says hi<br/>");
 		
 		/*
 		 * Create Client information
@@ -62,10 +67,12 @@ public class CreateClient extends HttpServlet {
 	}
 	
 	private void listLeads(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String text = "******************";
 		response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
 	    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-	    response.getWriter().write(text); 
+	    
+	    
+	    String json = new Gson().toJson(ClientService.getLeads() );
+	    response.getWriter().write("{ \"data\":"   + json + " }"); 
 	}
 	
 	private void createClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,11 +99,6 @@ public class CreateClient extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		PrintWriter out = response.getWriter();
-		out.println("TestServlet says hi GET<br/>");
-		
 		String action = request.getParameter("action");
 		
 		if(action.equals("listLeads")){
