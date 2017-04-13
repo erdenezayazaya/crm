@@ -1,28 +1,22 @@
 package edu.mum.mpp.zayagerman.servlets;
 
 import java.io.IOException;
-<<<<<<< HEAD
-=======
+
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> c74aea5441eb00bd67d52bcd3c801a9416511ce6
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
 
 import com.google.gson.Gson;
 
 import edu.mum.mpp.zayagerman.client.ClientType;
-=======
 import com.google.gson.Gson;
 import edu.mum.mpp.zayagerman.client.ClientType;
 import edu.mum.mpp.zayagerman.client.ClientLead;
->>>>>>> c74aea5441eb00bd67d52bcd3c801a9416511ce6
 import edu.mum.mpp.zayagerman.dto.ClientData;
 import edu.mum.mpp.zayagerman.services.ClientService;
 
@@ -43,27 +37,26 @@ public class CreateClient extends HttpServlet {
 		
 		/*if(action.equals("listLeads")){
 			listLeads(request, response);
-<<<<<<< HEAD
+
 		}*/
 		
 		//PrintWriter out = response.getWriter();
 		//out.println("TestServlet says hi<br/>");
-		
-=======
-		}
 
->>>>>>> c74aea5441eb00bd67d52bcd3c801a9416511ce6
+		//}
+
+
 		/*
 		 * Create Client information
 		 */
 		
 		//if(action.equals("createLead")){
-			createClient(request, response);
+		//	createClient(request, response);
 			//}
 		
 		
 		
-		return;
+		//return;
 	}
 	
 	private void listLeads(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

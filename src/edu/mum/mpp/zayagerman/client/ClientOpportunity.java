@@ -35,7 +35,7 @@ public final class ClientOpportunity extends Client {
 		this.description = description;
 	}
 
-	public String getStage() {
+	public Stage getStage() {
 		return stage;
 	}
 	

@@ -119,7 +119,7 @@ public class ManageOpportunity extends HttpServlet {
 		client.setOpporProbability(Integer.parseInt(request.getParameter("OpporProbability")));
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		Date closeDateOppor = (Date) formatter.parse(request.getParameter("OpporCloseDate"));
-		client.setOpporCloseDate(closeDateOppor);
+		//client.setOpporCloseDate(closeDateOppor);
 		client.setOpporDescription(request.getParameter("OpporDescription"));
 
 		ClientService.createClient(ClientType.OPPORTUNITY, client);

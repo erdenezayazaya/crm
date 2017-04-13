@@ -33,8 +33,8 @@ public class ClientFactory {
             throw new ExceptionInInitializerError(ex); 
          }
     	
-//    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
-//    	Session session = factory.openSession();
+   	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+    	Session session = factory.openSession();
     	
     	Transaction transaction=session.beginTransaction();  
     	
@@ -123,7 +123,7 @@ public class ClientFactory {
          	
     	if(type.equals(ClientType.CLIENTBASIC))
     	{
-    		ClientBasic clientBasic = new ClientBasic();
+    		ClientBasic clientBasic = new ClientBasic(0, null, null, null);
     		
     		clientBasic.setFirstName(client.getClientFirstName());    	
     		clientBasic.setLastName(client.getClientLastName());
@@ -155,7 +155,7 @@ public class ClientFactory {
     		clientOpportunity.setFirstName(client.getClientFirstName());
     		clientOpportunity.setLastName(client.getClientLastName());
     		clientOpportunity.setProbability(client.getOpporProbability());
-    		clientOpportunity.setStage(client.getOpporStage());
+    		//clientOpportunity.setStage(client.getOpporStage());
     		
     		session.persist(clientOpportunity);
     	}
