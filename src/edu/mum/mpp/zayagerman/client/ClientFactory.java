@@ -19,11 +19,22 @@ public class ClientFactory {
     
     public static ClientBasic getClient(int id)
     {
-    	Configuration config = new Configuration();
-    	config.configure("hibernate.cfg.xml");
+    /*	Configuration config = new Configuration();
+    	config.configure("hibernate.cfg.xml");*/
     	
-    	SessionFactory factory = config.buildSessionFactory();
-    	Session session = factory.openSession();
+    	try{
+    		SessionFactory factory = ((AnnotationConfiguration) new AnnotationConfiguration().
+                      configure()).
+                      //addPackage("com.xyz") //add package if used.
+                      addAnnotatedClass(ClientBasic.class).
+                      buildSessionFactory();
+         }catch (Throwable ex) { 
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex); 
+         }
+    	
+//    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+//    	Session session = factory.openSession();
     	
     	Transaction transaction=session.beginTransaction();  
     	
@@ -40,10 +51,10 @@ public class ClientFactory {
     }
     
     public static List<ClientLead> getLeads(){
-    	Configuration config = new Configuration();
-    	config.configure("hibernate.cfg.xml");
+    	/*Configuration config = new Configuration();
+    	config.configure("hibernate.cfg.xml");*/
     	
-    	SessionFactory factory = config.buildSessionFactory();
+    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
     	Session session = factory.openSession();
     	
     	Transaction transaction=session.beginTransaction();  
@@ -60,10 +71,10 @@ public class ClientFactory {
     }
     
     public static List<ClientOpportunity> getOportunities(){
-    	Configuration config = new Configuration();
-    	config.configure("hibernate.cfg.xml");
+    /*	Configuration config = new Configuration();
+    	config.configure("hibernate.cfg.xml");*/
     	
-    	SessionFactory factory = config.buildSessionFactory();
+    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
     	Session session = factory.openSession();
     	
     	Transaction transaction=session.beginTransaction();  
@@ -81,10 +92,10 @@ public class ClientFactory {
     
     public static List<ClientBasic> getClientBasics()
     {
-    	Configuration config = new Configuration();
-    	config.configure("hibernate.cfg.xml");
+    	/*Configuration config = new Configuration();
+    	config.configure("hibernate.cfg.xml");*/
     	
-    	SessionFactory factory = config.buildSessionFactory();
+    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
     	Session session = factory.openSession();
     	
     	Transaction transaction=session.beginTransaction();  

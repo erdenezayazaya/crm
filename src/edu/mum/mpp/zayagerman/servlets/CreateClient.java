@@ -1,21 +1,17 @@
 package edu.mum.mpp.zayagerman.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.sun.net.httpserver.HttpContext;
 
-import edu.mum.mpp.zayagerman.client.ClientFactory.ClientType;
+import edu.mum.mpp.zayagerman.client.ClientType;
 import edu.mum.mpp.zayagerman.dto.ClientData;
 import edu.mum.mpp.zayagerman.services.ClientService;
 
@@ -34,9 +30,9 @@ public class CreateClient extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		if(action.equals("listLeads")){
+		/*if(action.equals("listLeads")){
 			listLeads(request, response);
-		}
+		}*/
 		
 		//PrintWriter out = response.getWriter();
 		//out.println("TestServlet says hi<br/>");
@@ -45,9 +41,9 @@ public class CreateClient extends HttpServlet {
 		 * Create Client information
 		 */
 		
-		if(action.equals("createLead")){
+		//if(action.equals("createLead")){
 			createClient(request, response);
-		}
+			//}
 		
 		
 		//HttpSession session = request.getSession();
@@ -81,12 +77,12 @@ public class CreateClient extends HttpServlet {
 		client.setClientLastName(request.getParameter("clientLastName"));
 		client.setClientEmail(request.getParameter("clientEmail"));
 		
-		client.setLeadAmount(3.0);
-		//client.setLeadAmount(Double.parseDouble(request.getParameter("LeadAmount")));
-		client.setLeadSource(request.getParameter("leadSource"));
-		client.setLeadStatus(request.getParameter("leadStatus"));
-		client.setLeadIndustry(request.getParameter("leadIndustry"));
-		client.setLeadDescription(request.getParameter("leadDescription"));
+	//	client.setLeadAmount(3.0);
+	//	//client.setLeadAmount(Double.parseDouble(request.getParameter("LeadAmount")));
+//		client.setLeadSource(request.getParameter("leadSource"));
+//		client.setLeadStatus(request.getParameter("leadStatus"));
+		/*client.setLeadIndustry(request.getParameter("leadIndustry"));
+		client.setLeadDescription(request.getParameter("leadDescription"));*/
 		
 		ClientService.createClient(ClientType.LEAD, client);
 		

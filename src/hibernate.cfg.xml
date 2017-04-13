@@ -27,7 +27,6 @@
    <property name="hbm2ddl.auto">auto</property>
 	
    <!-- List of XML mapping files -->
-   <mapping class="edu/mum/mpp/zayagerman/client/Client"/>
    <mapping resource="edu.mum.mpp.zayagerman.client.ClientBasic"/>
    <mapping resource="edu.mum.mpp.zayagerman.client.ClientLead"/>
    <mapping resource="edu.mum.mpp.zayagerman.client.ClientOpportunity"/>
