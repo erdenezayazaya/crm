@@ -27,8 +27,9 @@
           <ul id="nav">
             <li class="selected"><a href="../index.html">Home</a></li>
             <li><a href="leadCreation.jsp">Clients</a></li>
+            <li><a href="opportunityCreation.jsp">Opportunities</a></li>
             <li><a href="testimonials.html">Activities</a></li>
-            <li><a href="projects.html">Sales</a></li>
+            <li><a href="salesCreation.jsp">Sales</a></li>
             <li class="last"><a href="contact.html">Campaigns</a></li>
           </ul>
         </div>

@@ -14,13 +14,13 @@ public class Sale {
 	private int idSale;
 	
 	@Column(name = "typeSale")
-    private String typeSale;
+    private TypeSale typeSale;
 	
 	@Column(name = "amount")
     private double amount;
 	
 	@Column(name = "percentGain")
-    private int percentGain;
+    private double percentGain;
 	
 	@Column(name = "amountGain")
     private double amountGain;
@@ -34,7 +34,7 @@ public class Sale {
     public Sale() {
     }
     
-	public Sale(int idSale, String typeSale, double amount, int percentGain, double amountGain, LocalDate dateSale, ClientBasic clientBasic) {
+	public Sale(int idSale, TypeSale typeSale, double amount, double percentGain, double amountGain, LocalDate dateSale, ClientBasic clientBasic) {
 		super();
 		this.idSale = idSale;
 		this.typeSale = typeSale;
@@ -53,11 +53,11 @@ public class Sale {
 		this.idSale = idSale;
 	}
 	
-	public String getTypeSale() {
+	public TypeSale getTypeSale() {
 		return typeSale;
 	}
 	
-	public void setTypeSale(String typeSale) {
+	public void setTypeSale(TypeSale typeSale) {
 		this.typeSale = typeSale;
 	}
 	
@@ -69,11 +69,11 @@ public class Sale {
 		this.amount = amount;
 	}
 	
-	public int getPercentGain() {
+	public double getPercentGain() {
 		return percentGain;
 	}
 	
-	public void setPercentGain(int percentGain) {
+	public void setPercentGain(double percentGain) {
 		this.percentGain = percentGain;
 	}
 	
@@ -99,5 +99,9 @@ public class Sale {
 
 	public void setClientBasic(ClientBasic clientBasic) {
 		this.clientBasic = clientBasic;
+	}
+	
+	public String toString(){
+		return "Sale: TypeSale:" + getTypeSale() + " Amount:" + getAmount() + " Client: " + getClientBasic().getFirstName();  
 	}
 }

@@ -15,8 +15,9 @@ public class ClientBasic extends Client{
 	private List<Activity> activityList;
 	private List<Sale> saleList;
 	
-	public ClientBasic()
+	public ClientBasic(int id, String firstName, String lastName, String email)
 	{
+		super(id, firstName, lastName, email);
 		addressList = new ArrayList<>();
 		activityList = new ArrayList<>();
 		saleList = new ArrayList<>();
