@@ -1,6 +1,7 @@
 package edu.mum.mpp.zayagerman.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.jasper.tagplugins.jstl.core.Out;
 
 import com.google.gson.Gson;
 
@@ -70,7 +73,7 @@ public class ManageSale extends HttpServlet {
 
 		if (action.equals("create")) {
 			try {
-				//createOpportunity(request, response);
+				createSale(request, response);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -103,7 +106,7 @@ public class ManageSale extends HttpServlet {
 		response.getWriter().write("{ \"data\":" + json + " }");
 	}
 	
-	private void createSale(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void createSale(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
 		TypeSale typeNewSale = TypeSale.valueOf(request.getParameter("typeSale"));
 		Double amountNewSale = Double.valueOf(request.getParameter("OpporAmount"));
 		int idClient = Integer.valueOf(request.getParameter("idClient"));
@@ -117,9 +120,13 @@ public class ManageSale extends HttpServlet {
 		LocalDate today = LocalDate.now();
 		sale.setDateSale(today);
 		
+		PrintWriter out = response.getWriter();
+		out.println(sale);
+		
+		
 		SalesService.createSale(idClient, sale);
 		
-		//response.sendRedirect("modules/success.jsp");
+		response.sendRedirect("modules/success.jsp");
 		RequestDispatcher rd = request.getRequestDispatcher("modules/saleCreation.jsp");
 		rd.forward(request, response);
 	}

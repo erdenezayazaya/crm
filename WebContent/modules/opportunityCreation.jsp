@@ -4,7 +4,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"  ></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"  ></script>
-
+  <link rel="stylesheet" type="text/css" href="styleForm.css" />
 
 <script type="text/javascript" class="init">
 $(document).ready(function() {
@@ -40,20 +40,23 @@ $(document).ready(function() {
 				<div style="width:600px; float:left;">
 				<br>
 				<form name="clientCreation" action="../CreateClient" method="post">
-					<h3>Create New Opportunity</h3>
-
-							<label class="" for="firstname">First name: </label> 
-							<input class="" type="text" name="clientFirstName" required><br> 
-
-							<label class="" for="lastname">Last name: </label> 
-							<input class="" type="text" name="clientLastName" required><br>
-
+					<ul class="form-style-1">
+						<h3>Create New Opportunity</h3>
+						<li>
+							<label class="" for="firstname">Full Name </label> 
+							<input class="" type="text" name="clientFirstName" required placeholder="First">&nbsp;
+							<input class="" type="text" name="clientLastName" required placeholder="Last"> 
+						<li>
+						</li>
 							<label class="" for="lastname">Enter email </label> 
-							<input class="" type="email" name="clientEmail" required placeholder="email@example.com" /><br /> 
-
-							<label class="" for="firstname">Stage: </label> 
+							<input size="48" type="email" name="clientEmail" required placeholder="email@example.com" /> 
+						<li>
+						</li>
+							<label class="" for="firstname">Stage: 
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Amount:
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Probability:
+							</label> 
 							<select name="OpporStage">
-							
 							  <option value="0">Prospecting</option>
 							  <option value="10">Need Analysis</option>
 							  <option value="20">Proposal</option>
@@ -61,37 +64,36 @@ $(document).ready(function() {
 							  <option value="30">Closed Won</option>
 							  <option value="30">Closed Lost</option>
 							  </select>
-							<br>
-							<label class="" for="firstname">Amount: </label> 
-							<input class="" type="number" name="OpporAmount" min="1" max="1000000" required><br>
-
-							<label class="" for="firstname">Probability: </label> 
-							<!-- <input class="" type="text" name="OpporProbability" required><br> -->
-							<select name="OpporProbability">
-							
-							  <option value="0">0%</option>
-							  <option value="10">10%</option>
-							  <option value="20">20%</option>
-							  <option value="30">30%</option>
-							  <option value="40">40%</option>
-							  <option value="50">50%</option>
-							  <option value="60">60%</option>
-							  <option value="70">70%</option>
-							  <option value="80">80%</option>
-							  <option value="90">90%</option>
-							  <option value="100">100%</option>
-							  
-							</select>
-							<br>
-
+							  &nbsp;&emsp;&emsp;
+							  <input class="" type="number" name="OpporAmount" min="1" max="1000000" required>
+							  &nbsp;&emsp;&emsp;
+							  <select name="OpporProbability" >
+								  <option value="0">0%</option>
+								  <option value="10">10%</option>
+								  <option value="20">20%</option>
+								  <option value="30">30%</option>
+								  <option value="40">40%</option>
+								  <option value="50">50%</option>
+								  <option value="60">60%</option>
+								  <option value="70">70%</option>
+								  <option value="80">80%</option>
+								  <option value="90">90%</option>
+								  <option value="100">100%</option>
+								</select>
+						</li>	  
+						<li>
 							<label class="" for="firstname">Close Date: </label> 
-							<input class="" type="date" name="OpporCloseDate" ><br>
-
+							<input class="" type="date" name="OpporCloseDate" >
+						<li>
+						</li>
 							<label class="" for="firstname">Description: </label> 
-							<input class="" type="text" name="OpporDescription" ><br>
-
+							<textarea name="OpporDescription" cols="49"></textarea>
+						<li>
+						</li>
 							<input type="submit" value="submit" />	
-							<input class="" type="hidden" value="create" name="action"><br>
+							<input class="" type="hidden" value="create" name="action">
+						<li>
+					</ul>
 				</form>
 				<br>
 

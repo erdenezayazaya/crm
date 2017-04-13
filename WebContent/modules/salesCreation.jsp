@@ -4,10 +4,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"  ></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"  ></script>
-
+  <link rel="stylesheet" type="text/css" href="styleForm.css" />
 
 <script type="text/javascript" class="init">
-
 $(document).ready(function() {
     $('#tableSales').DataTable( {
         "ajax": '../ManageSale?action=list', 
@@ -17,9 +16,7 @@ $(document).ready(function() {
             { "data": "amount" },
             { "data": "percentGain" },
             { "data": "amountGain" },
-            { "data":  function (data, type, dataToSet) {
-                		return data.year;
-            			}}
+            { "data": "dateSale.year"}
             ],
             "columnDefs": [
                 {
@@ -40,7 +37,7 @@ $(document).ready(function() {
             { "data": "stage" },
             { "data": "amount" },
             { "data": "probability" },
-            { "data": "closeDate" },
+            { "data": "closeDate.year" },
             { "data": "description" }
             ],
             "columnDefs": [
@@ -66,25 +63,13 @@ $(document).ready(function() {
             $("#idClient").val(tableOppor.row( this ).data().id);
         }
         
-        
     } );
-    
-    
-    
-    
-    
-    
+ 
+ 
 } );
 
 
-
- 
-//$('#tableOppor tbody').on( 'click', 'tr', function () {
-    //console.log( table.row( this ).data() );
-//} );
-
 </script>
-
 
 <div id="site_content">
 	<div id="content">
@@ -108,39 +93,44 @@ $(document).ready(function() {
 			                <th>Description</th>
 			            </tr>
 			        </thead>
-			        
 			    </table>
 
-
-				<form name="clientCreation" action="../CreateClient" method="post">
-					<h3>Create New Sale</h3>
-							
-							<label class="" for="firstname">Client Name: </label> 
-							<input class="" type="text" name="clientFullName" id="clientFullName" readonly ><br>
-							<label class="" for="firstname">Type Sale: </label> 
-							<select name="typeSale">
-							  <option value="HEALTHINSURANCE">Health Insurance</option>
-							  <option value="CARINSURANCE">Car Insurance</option>
-							  <option value="HOMEINSURANCE">Home Insurance</option>
-							  <option value="LIFEINSURANCE">Life Insurance</option>
-							  <option value="DISABILITYINSURANCE">Disability Insurance</option>
- 						    </select>
-							<br>
-							<label class="" for="firstname">Amount: </label> 
-							<input class="" type="number" name="OpporAmount" min="1" max="1000000" required><br>
-
-							<label class="" for="firstname">Close Date: </label> 
-							<input class="" type="date" name="dateSale" ><br>
-
-							<input type="submit" value="submit" />
+				<span>&nbsp;</br></span>
+				<form name="clientCreation" action="../ManageSale" method="post">
+					<ul class="form-style-1">
+						<h3>Create New Sale</h3>
+							<li>
+								<label>Client Name: <span class="required">*</span></label>
+								<input type="text" name="clientFullName" id="clientFullName" class="field-divided" placeholder="Select Client"  required />
+							</li>
+							<li>
+								<label>Type Sale: </label> 
+								<select name="typeSale">
+								  <option value="HEALTHINSURANCE">Health Insurance</option>
+								  <option value="CARINSURANCE">Car Insurance</option>
+								  <option value="HOMEINSURANCE">Home Insurance</option>
+								  <option value="LIFEINSURANCE">Life Insurance</option>
+								  <option value="DISABILITYINSURANCE">Disability Insurance</option>
+	 						    </select>
+	 						</li>
+							<li>
+								<label>Amount: <span class="required">*</span></label> 
+								<input type="number" name="OpporAmount" min="1" max="1000000" required>
+							</li>							
+							<li>
+								<label>Close Date: <span class="required">*</span></label> 
+								<input type="date" name="dateSale" required ><br>
+							</li>
+							<li>
+								<input type="submit" value="submit" />
+							</li>
 							<!-- Action -->	
 							<input  type="hidden" value="create" name="action">
 							<!-- Value of Id Client --><br>
-							<input  type="text" value="" name="idClient" id="idClient" readOnly>
+							<input  type="hidden" value="" name="idClient" id="idClient" required >
 							<br>
+					</ul>
 				</form>
-				<br>
-
 			<h3>Sales</h3>
 			<table id="tableSales" class="display" cellspacing="0" width="100%">
 			        <thead>

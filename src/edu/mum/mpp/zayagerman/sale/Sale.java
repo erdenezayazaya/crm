@@ -100,4 +100,8 @@ public class Sale {
 	public void setClientBasic(ClientBasic clientBasic) {
 		this.clientBasic = clientBasic;
 	}
+	
+	public String toString(){
+		return "Sale: TypeSale:" + getTypeSale() + " Amount:" + getAmount() + " Client: " + getClientBasic().getFirstName();  
+	}
 }
