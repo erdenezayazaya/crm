@@ -6,24 +6,14 @@ import javax.persistence.*;
 
 import edu.mum.mpp.zayagerman.client.ClientBasic;
 
-@Entity
-@Table(name="Activity")
 public class Activity {
 
-	@Id @GeneratedValue
-	@Column(name = "id")
     private int id;
-	@Column(name = "type")
     private String type;
-	@Column(name = "dateBegin")
     private LocalDate dateBegin;
-	@Column(name = "dateClosed")
     private LocalDate dateClosed;
-	@Column(name = "durationHours")
     private int durationHours;
-	@Column(name = "state")
     private String state;
-	@Column(name = "clientBasic")
     private ClientBasic clientBasic;
     
     public Activity() {

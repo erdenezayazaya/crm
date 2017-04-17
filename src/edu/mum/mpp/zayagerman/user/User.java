@@ -4,27 +4,13 @@ package edu.mum.mpp.zayagerman.user;
 import java.time.LocalDate;
 import javax.persistence.*;
 
-@Entity
-@Table(name="User")
 public class User {
 	
-	@Id @GeneratedValue
-	@Column(name = "id")
     private int id;
-
-	@Column(name = "loginName")
     private String loginName;
-
-	@Column(name = "name")
     private String name;
-	
-	@Column(name = "password")
     private String password;
-	
-	@Column(name = "accessLevel")
     private String accessLevel;
-	
-	@Column(name = "lastVisited")
     private LocalDate lastVisited;
     
     public User() {

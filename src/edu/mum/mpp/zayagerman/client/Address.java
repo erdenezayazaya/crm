@@ -1,35 +1,14 @@
 package edu.mum.mpp.zayagerman.client;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="Address")
 public class Address {
 
-	@Column(name = "type")
     private String type;
-	
-	@Column(name = "address")
     private String address;
-	
-	@Column(name = "phone")
     private String phone;
-	
-	@Column(name = "city")
-    private String city;
-	
-	@Column(name = "state")
+    private String city;	
     private String state;
-	
-	@Column(name = "zipCode")
     private int zipCode;
-	
-	@Column(name = "country")
     private String country;
-	
-	@Column(name = "clientBasic")
     private ClientBasic clientBasic;
     
     public Address() {

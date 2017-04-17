@@ -95,10 +95,10 @@ public class ManageSale extends HttpServlet {
 		
 		LocalDate today = LocalDate.now();
 		List<Sale> listSales = new ArrayList<>();
-		listSales.add(new Sale(1, TypeSale.CARINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.CARINSURANCE.percentage(), today, client1));
+	/*	listSales.add(new Sale(1, TypeSale.CARINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.CARINSURANCE.percentage(), today, client1));
 		listSales.add(new Sale(2, TypeSale.DISABILITYINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.DISABILITYINSURANCE.percentage(), today, client2));
 		listSales.add(new Sale(3, TypeSale.HOMEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.HOMEINSURANCE.percentage(), today, client3));
-		listSales.add(new Sale(4, TypeSale.LIFEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.LIFEINSURANCE.percentage(), today, client4));
+		listSales.add(new Sale(4, TypeSale.LIFEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.LIFEINSURANCE.percentage(), today, client4));*/
 			
 		String json = new Gson().toJson(listSales);
 		
@@ -111,9 +111,9 @@ public class ManageSale extends HttpServlet {
 		Double amountNewSale = Double.valueOf(request.getParameter("OpporAmount"));
 		int idClient = Integer.valueOf(request.getParameter("idClient"));
 		
-		Sale sale = new Sale();
-		sale.setTypeSale(typeNewSale);
-		sale.setClientBasic(ClientService.getclient(idClient));
+		Sale sale = new Sale();/*
+		sale.setTypeSale(typeNewSale);*/
+		//sale.setClientBasic(ClientService.getclient(idClient));
 		sale.setAmount(amountNewSale);
 		sale.setPercentGain(typeNewSale.percentage());
 		sale.setAmountGain(typeNewSale.percentage() * amountNewSale);

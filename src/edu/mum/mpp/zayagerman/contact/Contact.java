@@ -1,24 +1,9 @@
 package edu.mum.mpp.zayagerman.contact;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="Contact")
 public class Contact {
 
-	@Id @GeneratedValue
-	@Column(name = "id")
     private int id;
-    
-    @Embedded
     private Company company;
-    
-    @Embedded
     private Industry industry;
     
     public Contact() {

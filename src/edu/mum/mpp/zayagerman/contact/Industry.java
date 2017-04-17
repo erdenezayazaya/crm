@@ -1,16 +1,12 @@
 package edu.mum.mpp.zayagerman.contact;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class Industry {
 
     private String name;
     private boolean state;
 
     public Industry() {
-    }
-    
+    }    
 
 	public Industry(String name, boolean state) {
 		super();

@@ -2,18 +2,18 @@ package edu.mum.mpp.zayagerman.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 
 import edu.mum.mpp.zayagerman.activity.Activity;
 import edu.mum.mpp.zayagerman.sale.Sale;
 
-@Entity
-@Table(name = "ClientBasic")
+
 public class ClientBasic extends Client{
 	
 	private List<Address> addressList;
 	private List<Activity> activityList;
 	private List<Sale> saleList;
+	
+	public ClientBasic() {}
 	
 	public ClientBasic(int id, String firstName, String lastName, String email)
 	{

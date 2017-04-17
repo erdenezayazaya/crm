@@ -2,26 +2,13 @@
 package edu.mum.mpp.zayagerman.campaign;
 
 import java.time.LocalDate;
-import javax.persistence.*;
 
-@Entity
-@Table(name="Campaign")
 public class Campaign {
 
-	@Id @GeneratedValue
-	@Column(name = "id")
     public int id;
-	
-	@Column(name = "name")
     public String name;
-	
-	@Column(name = "date")
     public LocalDate date;
-	
-	@Column(name = "details")
     public String details;
-	
-	@Column(name = "state")
     public boolean state;
     
     public Campaign() {

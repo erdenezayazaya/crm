@@ -1,32 +1,18 @@
 package edu.mum.mpp.zayagerman.client;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "ClientLead")
 public class ClientLead extends Client {
-	
-	@Column(name = "source")
     private String source;
-	
-	@Column(name = "status")
     private String status;
-	
-	@Column(name = "amount")
     private double amount;
-	
-	@Column(name = "industry")
     private String industry;
-    
-	@Column(name = "description")
     private String description;
     
 	public ClientLead() {
 		super();
 	}
 
-	public ClientLead(String source, String status, double amount, String industry, String description) {
-		super();
+	public ClientLead(int id, String firstName, String lastName, String email, String source, String status, double amount, String industry, String description) {
+		super(id, firstName, lastName, email);
 		this.source = source;
 		this.status = status;
 		this.amount = amount;

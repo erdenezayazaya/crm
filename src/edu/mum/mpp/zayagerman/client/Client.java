@@ -1,27 +1,9 @@
 package edu.mum.mpp.zayagerman.client;
 
-import javax.persistence.*;
-
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-	name = "ClientType",
-	discriminatorType = DiscriminatorType.STRING
-)
-@Table(name = "EMPLOYEE")
 public class Client {
-
-	@Id @GeneratedValue
-	@Column(name = "id")
 	private int id;
-	
-	@Column(name = "firstName")
 	private String firstName;
-	
-	@Column(name = "lastName")
 	private String lastName;
-	
-	@Column(name = "email")
 	private String email;
 	
 	public Client() {}

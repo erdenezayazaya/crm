@@ -96,10 +96,10 @@ public class ManageOpportunity extends HttpServlet {
 	
 		LocalDate today = LocalDate.now();
 		List<ClientOpportunity> listOppor = new ArrayList<>();
-		listOppor.add(new ClientOpportunity(1, "German", "Segura", " gsegura@gmail.com", Stage.NEGOTIATION, 5000.00, 10, today, "Description1"));
+/*		listOppor.add(new ClientOpportunity(1, "German", "Segura", " gsegura@gmail.com", Stage.NEGOTIATION, 5000.00, 10, today, "Description1"));
 		listOppor.add(new ClientOpportunity(2, "John", "McQuin", " john@gmail.com", Stage.NEGOTIATION, 5000.00, 20, today, "Description2"));
 		listOppor.add(new ClientOpportunity(3, "Bruce", "Lee", " lee@gmail.com", Stage.NEGOTIATION, 5000.00, 25, today, "Description3"));
-		listOppor.add(new ClientOpportunity(4, "Jet Li", "Segura", " jet@gmail.com", Stage.NEGOTIATION, 5000.00, 80, today, "Description4"));
+		listOppor.add(new ClientOpportunity(4, "Jet Li", "Segura", " jet@gmail.com", Stage.NEGOTIATION, 5000.00, 80, today, "Description4"));*/
 		String json = new Gson().toJson(listOppor);
 		
 		

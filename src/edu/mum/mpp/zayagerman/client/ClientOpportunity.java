@@ -1,32 +1,19 @@
 package edu.mum.mpp.zayagerman.client;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "ClientOpportunity")
 public final class ClientOpportunity extends Client {
-
-	@Column(name = "stage")
-    private Stage stage;
-	
-	@Column(name = "amount")
+    private String stage;
     private double amount;
-	
-	@Column(name = "probability")
     private int probability;
-	
-	@Column(name = "closeDate")
     private LocalDate closeDate;
-	
-	@Column(name = "description")
     private String description;
     
 	public ClientOpportunity() {
 		super();
 	}
 
-	public ClientOpportunity(int id, String firstName, String lastName, String email, Stage stage, double amount, int probability, LocalDate closeDate, String description) {
+	public ClientOpportunity(int id, String firstName, String lastName, String email, String stage, double amount, int probability, LocalDate closeDate, String description) {
 		super(id, firstName, lastName, email);
 		this.stage = stage;
 		this.amount = amount;
@@ -35,11 +22,11 @@ public final class ClientOpportunity extends Client {
 		this.description = description;
 	}
 
-	public Stage getStage() {
+	public String getStage() {
 		return stage;
 	}
 	
-	public void setStage(Stage stage) {
+	public void setStage(String stage) {
 		this.stage = stage;
 	}
 	

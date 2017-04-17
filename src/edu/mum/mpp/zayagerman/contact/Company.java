@@ -1,8 +1,5 @@
 package edu.mum.mpp.zayagerman.contact;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class Company {
 	
     public int id;
