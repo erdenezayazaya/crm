@@ -1,5 +1,6 @@
 package edu.mum.mpp.zayagerman.activity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.*;
@@ -10,8 +11,8 @@ public class Activity {
 
     private int id;
     private String type;
-    private LocalDate dateBegin;
-    private LocalDate dateClosed;
+    private Date dateBegin;
+    private Date dateClosed;
     private int durationHours;
     private String state;
     private ClientBasic clientBasic;
@@ -19,7 +20,7 @@ public class Activity {
     public Activity() {
     }
     
-	public Activity(int id, String type, LocalDate dateBegin, LocalDate dateClosed, int durationHours, String state,
+	public Activity(int id, String type, Date dateBegin, Date dateClosed, int durationHours, String state,
 			ClientBasic clientBasic) {
 		super();
 		this.id = id;
@@ -47,19 +48,19 @@ public class Activity {
 		this.type = type;
 	}
 	
-	public LocalDate getDateBegin() {
+	public Date getDateBegin() {
 		return dateBegin;
 	}
 	
-	public void setDateBegin(LocalDate dateBegin) {
+	public void setDateBegin(Date dateBegin) {
 		this.dateBegin = dateBegin;
 	}
 	
-	public LocalDate getDateClosed() {
+	public Date getDateClosed() {
 		return dateClosed;
 	}
 	
-	public void setDateClosed(LocalDate dateClosed) {
+	public void setDateClosed(Date dateClosed) {
 		this.dateClosed = dateClosed;
 	}
 	

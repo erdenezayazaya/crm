@@ -124,74 +124,10 @@ public class ClientFactory {
     public static boolean createClient(ClientType type, ClientData client) {
     	
     	
-    
-    	//creating configuration object  
-        Configuration cfg=new Configuration();  
-        cfg.configure("hibernate.cfg.xml");//populates the data of the configuration file  
-          
-        //creating seession factory object  
-        SessionFactory factory= AnnotationConfiguration().configure().buildSessionFactory();  
-          
-        //creating session object  
-        Session session=factory.openSession(); 
-	   
-	    Transaction t=null; 
-	    Client clientOne = new Client();
-	    
-	    try{
-	    	t=session.beginTransaction();
-	    		
-	    	if(type.equals(ClientType.CLIENTBASIC))
-	    	{
-	    		ClientBasic clientBasic = new ClientBasic();
-	    		
-	    		clientOne.setFirstName(client.getClientFirstName());    	
-	    		clientOne.setLastName(client.getClientLastName());
-	    		clientOne.setEmail(client.getClientEmail());  
-	    		
-	    		session.persist(clientOne);
-	    		session.persist(clientBasic);
-	    	}    	
-	        else if(type.equals(ClientType.LEAD)){
-	    		ClientLead clientLead = new ClientLead();
-	    		
-	    		clientLead.setSource(client.getLeadSource());
-	    		clientLead.setAmount(client.getLeadAmount());
-	    		clientLead.setDescription(client.getLeadDescription());
-	    		clientLead.setEmail(client.getClientEmail());
-	    		clientLead.setFirstName(client.getClientFirstName());
-	    		clientLead.setIndustry(client.getLeadIndustry());
-	    		clientLead.setLastName(client.getLeadIndustry());
-	    		clientLead.setStatus(client.getLeadStatus());  
-	    		
-	    		session.persist(clientLead);
-	    	}
-	        else if (type.equals(ClientType.OPPORTUNITY)){
-	    		ClientOpportunity clientOpportunity = new ClientOpportunity();
-	    		
-	    		clientOpportunity.setAmount(client.getOpporAmount());
-	    		clientOpportunity.setCloseDate(client.getOpporCloseDate());
-	    		clientOpportunity.setDescription(client.getOpporDescription());
-	    		clientOpportunity.setEmail(client.getClientEmail());
-	    		clientOpportunity.setFirstName(client.getClientFirstName());
-	    		clientOpportunity.setLastName(client.getClientLastName());
-	    		clientOpportunity.setProbability(client.getOpporProbability());
-	    		clientOpportunity.setStage(client.getOpporStage());
-	    		
-	    		session.persist(clientOpportunity);
-	    	}
-	
-	    	t.commit();
-	    }
-	   catch (HibernateException e) {
-	         if (t!=null) t.rollback();
-	         e.printStackTrace(); 
-	   }
-	   finally{
-		   session.close(); 
-	   }
-       return true;
+    	
     }
+    
+    
     /* Client Basic End */
     
     public static List<ClientLead> getLeads(){

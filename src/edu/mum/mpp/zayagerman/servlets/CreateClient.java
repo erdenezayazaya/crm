@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import edu.mum.mpp.zayagerman.client.ClientBasic;
 import edu.mum.mpp.zayagerman.client.ClientLead;
 import edu.mum.mpp.zayagerman.client.ClientType;
+import edu.mum.mpp.zayagerman.client.Student;
+import edu.mum.mpp.zayagerman.controller.StudentController;
+import edu.mum.mpp.zayagerman.dao.StudentDAO;
 import edu.mum.mpp.zayagerman.dto.ClientData;
 import edu.mum.mpp.zayagerman.services.ClientService;
 
@@ -129,22 +131,14 @@ public class CreateClient extends HttpServlet {
 //			listLeads(request, response);
 //		}
 		
-		 String userName = "dw";
-	        String password = "dw";
-	        String email = "dw";
-	        String phone = "dw";
-	        String city = "dw";
-	        
-	        ClientData lead = new ClientData();
-	        lead.setClientFirstName("dwdw");
-	 
-	        HttpSession session = request.getSession(true);
-	       
-	        try {
-	           ClientService.createClient(ClientType.LEAD, lead);
-	        } catch (Exception e) {
-	 
-	            e.printStackTrace();
-	        }
+	    StudentDAO dao = new StudentController();
+		 
+	 	Student student = new Student();
+        student.setFirstName("dw");
+        student.setLastName("dw");
+        student.setCourse("dw");
+        student.setYear(12);
+        
+        dao.addStudent(student);	
 	}
 }
