@@ -1,8 +1,9 @@
 package edu.mum.mpp.zayagerman.entity;
 
 public class Industry {
+	private int id;
     private String name;
-    private boolean state;
+    private String state;
 
 	public String getName() {
 		return name;
@@ -12,11 +13,19 @@ public class Industry {
 		this.name = name;
 	}
 
-	public boolean isState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(boolean state) {
+	public void setState(String state) {
 		this.state = state;
-	}    
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.mum.mpp.zayagerman.entity.Activity;
+import edu.mum.mpp.zayagerman.entity.Client;
+import edu.mum.mpp.zayagerman.service.ActivityDAO;
 import edu.mum.mpp.zayagerman.settings.DBUtil;
 
-public class ActivityController implements {	
+public class ActivityDAOImpl implements ActivityDAO{	
 	private Connection conn;
 	
-    public ActivityController() {
+    public ActivityDAOImpl() {
         conn = DBUtil.getConnection();
     }
 
@@ -28,7 +30,7 @@ public class ActivityController implements {
             preparedStatement.setDate(3, activity.getDateClosed());
             preparedStatement.setInt(4, activity.getDurationHours());
             preparedStatement.setString(5, activity.getState());
-            preparedStatement.setInt(6, activity.getClientBasic().getId());
+            preparedStatement.setInt(6, activity.getClient().getId());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             
@@ -56,7 +58,7 @@ public class ActivityController implements {
 	@Override
 	public void updateActivity(Activity activity) {
 		 try {			
-	            String query = "update student set type=?, dateBegin=?, dateClosed=?, durationHours=?, state=? where idactivity=?";
+	            String query = "update activity set type=?, dateBegin=?, dateClosed=?, durationHours=?, state=? where idactivity=?";
 	            PreparedStatement preparedStatement = conn.prepareStatement( query );
 	            preparedStatement.setString(1, activity.getType());
 	            preparedStatement.setDate(2, activity.getDateBegin());
@@ -78,21 +80,37 @@ public class ActivityController implements {
 		 List<Activity> activityList = new ArrayList<Activity>();
 	        try {
 	            Statement statement = conn.createStatement();
-	            ResultSet resultSet = statement.executeQuery( "select * from activity" );
+	            
+	        	StringBuilder queryBuilder = new StringBuilder();
+	        	queryBuilder.append("select c.id, c.firstname, c.lastName, c.email, a.idactivity, a.type, ");
+	        	queryBuilder.append("a.dateBegin, a.dateClosed, a.durationHours, a.state");
+	        	queryBuilder.append("from activity a ");
+	        	queryBuilder.append("inner join client c on a.client_id = c.id ");
+	 
+	            ResultSet resultSet = statement.executeQuery(queryBuilder.toString());
+	            
 	            while( resultSet.next() ) {
 	            	Activity activity = new Activity();
-	            	activity.set	                
-	                
-	                student.setStudentId( resultSet.getInt( "studentId" ) );
-	                student.setFirstName( resultSet.getString( "firstName" ) );
-	                student.setLastName( resultSet.getString( "lastName" ) );
-	                student.setCourse( resultSet.getString( "course" ) );
-	                student.setYear( resultSet.getInt( "year" ) );
-	                
-	                
-	                activityList.add(activity);
-	                
+	            
+            		Client client = new Client();
+	            	
+	            	client.setId(resultSet.getInt("id"));
+	            	client.setFirstName(resultSet.getString("firstname"));
+	            	client.setLastName(resultSet.getString("lastName"));
+	            	client.setEmail(resultSet.getString("email"));
+	            	
+	            	activity.setClient(client);
+	            	
+	            	activity.setId(resultSet.getInt("idactivity"));
+	            	activity.setType(resultSet.getString("type"));
+	            	activity.setDateBegin(resultSet.getDate("dateBegin"));
+	            	activity.setDateClosed(resultSet.getDate("dateClosed"));
+	            	activity.setDurationHours(resultSet.getInt("durationHours"));
+	            	activity.setState(resultSet.getString("state"));
+	            	
 	                System.out.println("New Activity Record: " + activity.toString());
+	            	
+	                activityList.add(activity);
 	            }
 	            resultSet.close();
 	            statement.close();
@@ -109,32 +127,34 @@ public class ActivityController implements {
 	        	
 	        	StringBuilder queryBuilder = new StringBuilder();
 	        	queryBuilder.append("select c.id, c.firstname, c.lastName, c.email, a.idactivity, a.type, ");
-	        	queryBuilder.append("a.dateBegin, a.dateClosed, a.durationHours, a.state, a.client_id ");
+	        	queryBuilder.append("a.dateBegin, a.dateClosed, a.durationHours, a.state ");
 	        	queryBuilder.append("from activity a ");
 	        	queryBuilder.append("inner join client c on a.client_id = c.id ");
 	        	queryBuilder.append("where id=?");
 	        	
-	            PreparedStatement preparedStatement = conn.prepareStatement(query);
+	            PreparedStatement preparedStatement = conn.prepareStatement(queryBuilder.toString());
 	            preparedStatement.setInt(1, activityId);
 	            
 	            ResultSet resultSet = preparedStatement.executeQuery();
 	            while(resultSet.next()) {
+	      
+	            	Client client = new Client();
+	            	
+	            	client.setId(resultSet.getInt("id"));
+	            	client.setFirstName(resultSet.getString("firstname"));
+	            	client.setLastName(resultSet.getString("lastName"));
+	            	client.setEmail(resultSet.getString("email"));
+	            	
+	            	activity.setClient(client);
 	            	
 	            	activity.setId(resultSet.getInt("idactivity"));
 	            	activity.setType(resultSet.getString("type"));
 	            	activity.setDateBegin(resultSet.getDate("dateBegin"));
-	            	activity.setDateClosed(resultSet.get);
+	            	activity.setDateClosed(resultSet.getDate("dateClosed"));
+	            	activity.setDurationHours(resultSet.getInt("durationHours"));
+	            	activity.setState(resultSet.getString("state"));
 	            	
-	            	activity.setDurationHours(durationHours);
-	            	activity.setId(id);
-	            	activity.setState(state);
-	            	activity.setType(type);
-	            	
-	                student.setStudentId( resultSet.getInt( "studentId" ) );
-	                student.setFirstName( resultSet.getString( "firstName" ) );
-	                student.setLastName( resultSet.getString( "LastName" ) );
-	                student.setCourse( resultSet.getString( "course" ) );
-	                student.setYear( resultSet.getInt( "year" ) );
+	            	System.out.println("New Activity Record: " + activity.toString());
 	            }
 	            resultSet.close();
 	            preparedStatement.close();

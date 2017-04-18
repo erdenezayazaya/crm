@@ -1,14 +1,14 @@
 
 package edu.mum.mpp.zayagerman.entity;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Campaign {
     public int id;
     public String name;
-    public LocalDate date;
+    public Date date;
     public String details;
-    public boolean state;
+    public int state;
 
 	public int getId() {
 		return id;
@@ -26,11 +26,11 @@ public class Campaign {
 		this.name = name;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -42,11 +42,11 @@ public class Campaign {
 		this.details = details;
 	}
 
-	public boolean isState() {
+	public int isState() {
 		return state;
 	}
 
-	public void setState(boolean state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 }

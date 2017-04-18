@@ -2,6 +2,7 @@ package edu.mum.mpp.zayagerman.entity;
 
 public class Address {
 
+	private int id;
     private String type;
     private String address;
     private String phone;
@@ -9,7 +10,7 @@ public class Address {
     private String state;
     private int zipCode;
     private String country;
-    private ClientBasic clientBasic;
+    private Client client;
 
 	public String getType() {
 		return type;
@@ -66,11 +67,19 @@ public class Address {
 		this.country = country;
 	}
 
-	public ClientBasic getClientBasic() {
-		return clientBasic;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setClientBasic(ClientBasic clientBasic) {
-		this.clientBasic = clientBasic;
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

@@ -7,6 +7,21 @@ public class ClientLead extends Client {
     private String industry;
     private String description;
     
+    public ClientLead()
+    {
+    	
+    }
+        
+	public ClientLead(String source, String status, double amount, String industry, String description,
+			int id, String firstName, String lastName, String email) {
+		super(id, firstName, lastName, email);
+		this.source = source;
+		this.status = status;
+		this.amount = amount;
+		this.industry = industry;
+		this.description = description;
+	}
+
 	public String getSource() {
 		return source;
 	}

@@ -1,7 +1,6 @@
 package edu.mum.mpp.zayagerman.entity;
 
-
-import java.util.Date;
+import java.sql.Date;
 
 public class Sale {
 	private int idSale;
@@ -10,7 +9,7 @@ public class Sale {
     private double percentGain;
     private double amountGain;
     private Date dateSale;
-    private ClientBasic clientBasic;
+    private Client client;
 
 	public int getIdSale() {
 		return idSale;
@@ -60,15 +59,15 @@ public class Sale {
 		this.dateSale = dateSale;
 	}
 
-	public ClientBasic getClientBasic() {
-		return clientBasic;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setClientBasic(ClientBasic clientBasic) {
-		this.clientBasic = clientBasic;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 	public String toString(){
-		return "Sale: TypeSale:" + getTypeSale() + " Amount:" + getAmount() + " Client: " + getClientBasic().getFirstName();  
+		return "Sale: TypeSale:" + getTypeSale() + " Amount:" + getAmount() + " Client: " + getClient().getFirstName();  
 	}
 }

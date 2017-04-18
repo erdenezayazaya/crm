@@ -10,7 +10,7 @@ public class Activity {
     private Date dateClosed;
     private int durationHours;
     private String state;
-    private ClientBasic clientBasic;
+    private Client client;
 
 	public int getId() {
 		return id;
@@ -60,11 +60,11 @@ public class Activity {
 		this.state = state;
 	}
 
-	public ClientBasic getClientBasic() {
-		return clientBasic;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setClientBasic(ClientBasic clientBasic) {
-		this.clientBasic = clientBasic;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 }

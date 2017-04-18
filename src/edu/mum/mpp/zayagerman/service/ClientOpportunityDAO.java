@@ -2,10 +2,12 @@ package edu.mum.mpp.zayagerman.service;
 
 import java.util.List;
 
+import edu.mum.mpp.zayagerman.entity.ClientOpportunity;
+
 public interface ClientOpportunityDAO {
-	public void addClientOpportunity(ClientOpportunityDAO clientOpportunity);
+	public void addClientOpportunity(ClientOpportunity clientOpportunity);
     public void deleteClientOpportunity(int clientOpportunityId);
-    public void updateClientOpportunity(ClientOpportunityDAO clientOpportunity);
-    public List<ClientOpportunityDAO> getAllClientOpportunitys();
-    public ClientOpportunityDAO getClientOpportunityById(int clientOpportunityId);
+    public void updateClientOpportunity(ClientOpportunity clientOpportunity);
+    public List<ClientOpportunity> getAllClientOpportunitys();
+    public ClientOpportunity getClientOpportunityById(int clientOpportunityId);
 }
