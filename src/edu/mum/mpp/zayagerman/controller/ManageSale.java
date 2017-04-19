@@ -106,59 +106,32 @@ public class ManageSale extends HttpServlet {
 	
 	
 	class dataGraphic{
-		TypeSale type;
+		String type;
 		double amount;
 		
-		dataGraphic(TypeSale type, double amount){
+		dataGraphic(String type, double amount){
 			this.type = type;
 			this.amount = amount;
 		}
 	}
 	
 	private void dataGraphicSale(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		/*
-		 * Temporal
-		 */
-		/*
-		ClientBasic client1 = new ClientBasic(1, "German", "Segura", " gsegura@gmail.com");
-		ClientBasic client2 = new ClientBasic(2, "John", "McQuin", " john@gmail.com");
-		ClientBasic client3 = new ClientBasic(3, "Bruce", "Lee", " lee@gmail.com");
-		ClientBasic client4 = new ClientBasic(4, "Jet Li", "Segura", " jet@gmail.com");
-		
-		LocalDate today = LocalDate.now();
+
 		List<Sale> listSales = new ArrayList<>();
-		listSales.add(new Sale(1, TypeSale.CARINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.CARINSURANCE.percentage(), today, client1));
-		listSales.add(new Sale(2, TypeSale.DISABILITYINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.DISABILITYINSURANCE.percentage(), today, client2));
-		listSales.add(new Sale(3, TypeSale.HOMEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.HOMEINSURANCE.percentage(), today, client3));
-		listSales.add(new Sale(4, TypeSale.LIFEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.LIFEINSURANCE.percentage(), today, client4));
-		
+		listSales = dao.getAllSales();
 		
 		
 		List<dataGraphic> salesData = new ArrayList<>();
 		for(Sale s: listSales){
-			salesData.add(new dataGraphic(s.getTypeSale(), s.getAmount()));
+			salesData.add(new dataGraphic(s.getTypeSale().getFullName(), s.getAmount()));
 		}
-		*/
-			
-		String json = new Gson().toJson(null);
+		
+		String json = new Gson().toJson(salesData);
 		response.setContentType("application/json");
-  	    response.getWriter().write(json);
-  	    /*
+		response.getWriter().write(json);
+		//response.getWriter().write("{ \"data\":" + json + " }");
 		
-		  @SuppressWarnings("rawtypes")
-		List empdetails = new LinkedList();
-		  JSONObject responseObj = new JSONObject();
-		
-		  for(Sale s: listSales){
-			   empObj = new JSONObject();
-	           empObj.put("name", s.getTypeSale());
-	           empObj.put("empid", s.getAmount());
-	           empdetails.add(empObj);
-			}
-		  response.getWriter().write("{ \"data\":" + json + " }");
-		  responseObj.put("empdetails", empdetails);
-		    out.print(responseObj.toString());
-		    */
+  	    
 	}
 	
 	
@@ -166,27 +139,10 @@ public class ManageSale extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
-		
-		/*
-		 * Temporal
-		 */
-		/*
-		ClientBasic client1 = new ClientBasic(1, "German", "Segura", " gsegura@gmail.com");
-		ClientBasic client2 = new ClientBasic(2, "John", "McQuin", " john@gmail.com");
-		ClientBasic client3 = new ClientBasic(3, "Bruce", "Lee", " lee@gmail.com");
-		ClientBasic client4 = new ClientBasic(4, "Jet Li", "Segura", " jet@gmail.com");
-		*/
-		
-		LocalDate today = LocalDate.now();
+	
 		List<Sale> listSales = new ArrayList<>();
-	/*	listSales.add(new Sale(1, TypeSale.CARINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.CARINSURANCE.percentage(), today, client1));
-		listSales.add(new Sale(2, TypeSale.DISABILITYINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.DISABILITYINSURANCE.percentage(), today, client2));
-		listSales.add(new Sale(3, TypeSale.HOMEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.HOMEINSURANCE.percentage(), today, client3));
-		listSales.add(new Sale(4, TypeSale.LIFEINSURANCE, 5000.00, TypeSale.CARINSURANCE.percentage(), 5000.00*TypeSale.LIFEINSURANCE.percentage(), today, client4));*/
-			
+		listSales = dao.getAllSales();
 		String json = new Gson().toJson(listSales);
-		
-		//String json = new Gson().toJson(SalesService.getList());
 		response.getWriter().write("{ \"data\":" + json + " }");
 	}
 	
@@ -208,7 +164,7 @@ public class ManageSale extends HttpServlet {
 		
 		dao.addSale(sale);
 		
-		response.sendRedirect("modules/saleCreation.jsp");
+		response.sendRedirect("modules/salesCreation.jsp");
 		//RequestDispatcher rd = request.getRequestDispatcher("modules/saleCreation.jsp");
 		//rd.forward(request, response);
 	}

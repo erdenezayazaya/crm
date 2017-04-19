@@ -13,6 +13,7 @@ import edu.mum.mpp.zayagerman.entity.Client;
 import edu.mum.mpp.zayagerman.entity.Sale;
 import edu.mum.mpp.zayagerman.service.SaleDAO;
 import edu.mum.mpp.zayagerman.settings.DBUtil;
+import edu.mum.mpp.zayagerman.settings.TypeSale;
 
 public class SaleDAOImpl implements SaleDAO{
 	private Connection conn;
@@ -24,17 +25,16 @@ public class SaleDAOImpl implements SaleDAO{
 	@Override
 	public void addSale(Sale sale) {
 		  try {
-	            String query = "insert into activity (id, typeSale, amount, percentGain, amountGain, dateSale, client_id) values (?,?,?,?,?,?,?)";
+	            String query = "insert into sale (typeSale, amount, percentGain, amountGain, dateSale, id_client) values (?,?,?,?,?,?)";
 	         
 	            PreparedStatement preparedStatement = conn.prepareStatement(query);
 	            
-	            preparedStatement.setInt(1, sale.getIdSale());
-	            preparedStatement.setString(1, sale.getTypeSale());
-	            preparedStatement.setDouble(1, sale.getAmount());
-	            preparedStatement.setDouble(1, sale.getPercentGain());
-	            preparedStatement.setDouble(1, sale.getAmountGain());
-	            preparedStatement.setDate(1, sale.getDateSale());
-	            preparedStatement.setInt(1, sale.getClient().getId());
+	            preparedStatement.setString(1, String.valueOf(sale.getTypeSale()));
+	            preparedStatement.setDouble(2, sale.getAmount());
+	            preparedStatement.setDouble(3, sale.getPercentGain());
+	            preparedStatement.setDouble(4, sale.getAmountGain());
+	            preparedStatement.setDate(5, sale.getDateSale());
+	            preparedStatement.setInt(6, sale.getClient().getId());
 	            
 	            preparedStatement.executeUpdate();
 	            preparedStatement.close();
@@ -69,7 +69,7 @@ public class SaleDAOImpl implements SaleDAO{
 	            
 	            PreparedStatement preparedStatement = conn.prepareStatement(query);
 	            
-	            preparedStatement.setString(1, sale.getTypeSale());
+	            preparedStatement.setString(1, String.valueOf(sale.getTypeSale()));
 	            preparedStatement.setDouble(2, sale.getAmount());
 	            preparedStatement.setDouble(3, sale.getPercentGain());
 	            preparedStatement.setDouble(4, sale.getAmount());
@@ -93,10 +93,10 @@ public class SaleDAOImpl implements SaleDAO{
 	            Statement statement = conn.createStatement();
 	            
 	        	StringBuilder queryBuilder = new StringBuilder();
-	           	queryBuilder.append("select c.id, c.firstname, c.lastName, c.email, s.id, s.typeSale, ");
-	        	queryBuilder.append("s.amount, s.percentGain, s.amountGain, s.dateSale, s.client_id ");
+	           	queryBuilder.append("select firstname, lastName, email, s.id, typeSale, ");
+	        	queryBuilder.append("amount, percentGain, amountGain, dateSale, s.id_client ");
 	        	queryBuilder.append("from sale s ");
-	        	queryBuilder.append("inner join client c on s.client_id = c.id ");
+	        	queryBuilder.append("inner join client c on s.id_client = c.id ");
 	 
 	            ResultSet resultSet = statement.executeQuery(queryBuilder.toString());
 	            
@@ -112,12 +112,12 @@ public class SaleDAOImpl implements SaleDAO{
 	            	
 	            	sale.setClient(client);
 	            	
-	            	sale.setIdSale(resultSet.getInt("s.id"));
-	            	sale.setAmount(resultSet.getDouble("s.amount"));
-	            	sale.setAmountGain(resultSet.getDouble("s.amountGain"));            	
+	            	sale.setIdSale(resultSet.getInt("id"));
+	            	sale.setAmount(resultSet.getDouble("amount"));
+	            	sale.setAmountGain(resultSet.getDouble("amountGain"));            	
 	            	sale.setDateSale(resultSet.getDate("dateSale"));
 	            	sale.setPercentGain(resultSet.getDouble("percentGain"));
-	            	sale.setTypeSale(resultSet.getString("typeSale"));	            	
+	            	sale.setTypeSale(TypeSale.valueOf(resultSet.getString("typeSale")));	            	
 	            	
 	                System.out.println("New Activity Record: " + sale.toString());
 	            	
@@ -164,7 +164,7 @@ public class SaleDAOImpl implements SaleDAO{
             	sale.setAmountGain(resultSet.getDouble("s.amountGain"));            	
             	sale.setDateSale(resultSet.getDate("dateSale"));
             	sale.setPercentGain(resultSet.getDouble("percentGain"));
-            	sale.setTypeSale(resultSet.getString("typeSale"));
+            	sale.setTypeSale(TypeSale.valueOf(resultSet.getString("typeSale")));
             	
             	System.out.println("New Sale Record: " + sale.toString());
             }

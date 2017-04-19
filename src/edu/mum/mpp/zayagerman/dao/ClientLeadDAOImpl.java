@@ -44,7 +44,7 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
 	            resultSet.close();
 	            statement.close();	
 			  
-	            query = "insert into client_lead (id, source, status, amount, industry, description, id_client) values (?,?,?,?,?,?)";
+	            query = "insert into client_lead (id, source, status, amount, industry, description, id_client) values (?,?,?,?,?,?,?)";
 	           
 	            preparedStatement = conn.prepareStatement(query);
 	            
