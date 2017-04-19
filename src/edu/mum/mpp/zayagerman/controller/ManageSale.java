@@ -16,13 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
-import org.hibernate.TypeMismatchException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-import edu.mum.mpp.zayagerman.services.ClientService;
-import edu.mum.mpp.zayagerman.services.SalesService;
 import edu.mum.mpp.zayagerman.settings.ClientType;
 import edu.mum.mpp.zayagerman.settings.TypeSale;
 import edu.mum.mpp.zayagerman.entity.Client;

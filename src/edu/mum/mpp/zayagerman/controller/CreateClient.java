@@ -9,16 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.google.gson.Gson;
-
 import edu.mum.mpp.zayagerman.dao.ClientLeadDAOImpl;
-import edu.mum.mpp.zayagerman.dao.StudentController;
-import edu.mum.mpp.zayagerman.entity.ClientData;
 import edu.mum.mpp.zayagerman.entity.ClientLead;
-
-import edu.mum.mpp.zayagerman.settings.ClientType;
+import edu.mum.mpp.zayagerman.service.ClientLeadDAO;
 
 /**
  * Servlet implementation class CreateClient
@@ -26,7 +20,7 @@ import edu.mum.mpp.zayagerman.settings.ClientType;
 @WebServlet(description = "Servlet for creating a client", urlPatterns = { "/CreateClient" })
 public class CreateClient extends HttpServlet {
 	
-	private ClientLeadDAOImpl dao;
+	private ClientLeadDAO dao;
 	
 	CreateClient(){
 		dao = new ClientLeadDAOImpl();
