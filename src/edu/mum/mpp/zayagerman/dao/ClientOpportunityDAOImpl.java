@@ -40,8 +40,10 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 
 	            ResultSet resultSet = statement.executeQuery("select id from client order by id DESC limit 1");
 	            
+	            int clientId = 0;
+	            
 	            while( resultSet.next() ) {
-	            	this.clientId  = resultSet.getInt("c.id");
+	            	clientId  = resultSet.getInt("c.id");
 		            resultSet.close();
 		            statement.close();	 
 	            }
@@ -55,7 +57,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	            preparedStatement.setInt(2, clientOpportunity.getProbability());
 	            preparedStatement.setDate(3, clientOpportunity.getCloseDate());
 	            preparedStatement.setString(4, clientOpportunity.getDescription());
-	            preparedStatement.setInt(5, this.clientId);
+	            preparedStatement.setInt(5, clientId);
 	           
 	            
 	            preparedStatement.executeUpdate();
