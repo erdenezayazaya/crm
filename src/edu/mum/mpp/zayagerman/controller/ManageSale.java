@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-
 import edu.mum.mpp.zayagerman.settings.ClientType;
 import edu.mum.mpp.zayagerman.settings.TypeSale;
 import edu.mum.mpp.zayagerman.entity.Client;
