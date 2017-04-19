@@ -121,7 +121,6 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             while( resultSet.next() ) {
             	ClientOpportunity clientOpportunity = new ClientOpportunity();
             	
-
             	clientOpportunity.setId(resultSet.getInt("c.id"));
             	clientOpportunity.setFirstName("c.firstname");
             	clientOpportunity.setLastName("c.lastname");
