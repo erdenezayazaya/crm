@@ -15,8 +15,7 @@ $(document).ready(function() {
             { "data": "typeSale" },
             { "data": "amount" },
             { "data": "percentGain" },
-            { "data": "amountGain" },
-            { "data": "dateSale.year"}
+            { "data": "amountGain" }
             ],
             "columnDefs": [
                 {
@@ -37,7 +36,6 @@ $(document).ready(function() {
             { "data": "stage" },
             { "data": "amount" },
             { "data": "probability" },
-            { "data": "closeDate.year" },
             { "data": "description" }
             ],
             "columnDefs": [
@@ -89,7 +87,6 @@ $(document).ready(function() {
 			                <th>Stage</th>
 			                <th>Amount</th>
 			                <th>Probability</th>
-			                <th>Close Date</th>
 			                <th>Description</th>
 			            </tr>
 			        </thead>
@@ -140,7 +137,6 @@ $(document).ready(function() {
 			                <th>Amount</th>
 			                <th>Percent Gain</th>
 			                <th>Amount Gain</th>
-			                <th>Date</th>
 			            </tr>
 			        </thead>
 			        <tfoot>
@@ -150,7 +146,6 @@ $(document).ready(function() {
 			                <th>Amount</th>
 			                <th>Percent Gain</th>
 			                <th>Amount Gain</th>
-			                <th>Date</th>
 			            </tr>
 			        </tfoot>
 			    </table>

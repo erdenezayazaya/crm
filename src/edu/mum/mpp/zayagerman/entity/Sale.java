@@ -2,9 +2,11 @@ package edu.mum.mpp.zayagerman.entity;
 
 import java.sql.Date;
 
+import edu.mum.mpp.zayagerman.settings.TypeSale;
+
 public class Sale {
 	private int idSale;
-    private String typeSale;
+    private TypeSale typeSale;
     private double amount;
     private double percentGain;
     private double amountGain;
@@ -19,11 +21,11 @@ public class Sale {
 		this.idSale = idSale;
 	}
 	
-	public String getTypeSale() {
+	public TypeSale getTypeSale() {
 		return typeSale;
 	}
 	
-	public void setTypeSale(String typeSale) {
+	public void setTypeSale(TypeSale typeSale) {
 		this.typeSale = typeSale;
 	}
 	
@@ -68,6 +70,6 @@ public class Sale {
 	}
 	
 	public String toString(){
-		return "Sale: TypeSale:" + getTypeSale() + " Amount:" + getAmount() + " Client: " + getClient().getFirstName();  
+		return "Sale: TypeSale:" + getTypeSale().getFullName() + " Amount:" + getAmount() + " Client: " + getClient().getFirstName();  
 	}
 }

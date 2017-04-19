@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.mum.mpp.zayagerman.entity.Activity;
-import edu.mum.mpp.zayagerman.entity.Client;
 import edu.mum.mpp.zayagerman.entity.ClientOpportunity;
 import edu.mum.mpp.zayagerman.service.ClientOpportunityDAO;
 import edu.mum.mpp.zayagerman.settings.DBUtil;
@@ -40,8 +38,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 
 	            ResultSet resultSet = statement.executeQuery("select id from client order by id DESC limit 1");
 	            
-	            int clientId = 0;
-	            
+            
 	            while( resultSet.next() ) {
 	            	this.clientId  = resultSet.getInt("id");
 	            }

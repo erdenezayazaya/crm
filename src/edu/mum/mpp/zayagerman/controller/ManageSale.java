@@ -37,7 +37,7 @@ public class ManageSale extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SaleDAO dao;
 	
-	ManageSale(){
+	public ManageSale(){
 		dao = new SaleDAOImpl();
 	}
 	/**
@@ -195,27 +195,22 @@ public class ManageSale extends HttpServlet {
 		Double amountNewSale = Double.valueOf(request.getParameter("OpporAmount"));
 		int idClient = Integer.valueOf(request.getParameter("idClient"));
 		
+		Client client = new Client();
+		client.setId(idClient);
 		
-		//dao.setTypeSale(typeNewSale);
-		//sale.setClientBasic(ClientService.getclient(idClient));
-		/*
+		Sale sale = new Sale();
+		sale.setClient(client);
 		sale.setAmount(amountNewSale);
-		
-		sale.setPercentGain(typeNewSale.percentage());
+		sale.setTypeSale(typeNewSale);
 		sale.setAmountGain(typeNewSale.percentage() * amountNewSale);
-		LocalDate today = LocalDate.now();
-		sale.setDateSale(today);
-		*/
+		sale.setDateSale(null);
+		sale.setPercentGain(typeNewSale.percentage());
 		
-		PrintWriter out = response.getWriter();
+		dao.addSale(sale);
 		
-		
-		
-		//SalesService.createSale(idClient, null);
-		
-		response.sendRedirect("modules/success.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("modules/saleCreation.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("modules/saleCreation.jsp");
+		//RequestDispatcher rd = request.getRequestDispatcher("modules/saleCreation.jsp");
+		//rd.forward(request, response);
 	}
 
 }
