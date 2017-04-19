@@ -110,6 +110,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
         try {
             Statement statement = conn.createStatement();
 
+
             ResultSet resultSet = statement.executeQuery("select * from client c inner "
             		+ "join client_opportunity "
             		+ "o on c.id = o.id_client");
@@ -117,6 +118,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             while( resultSet.next() ) {
             	ClientOpportunity clientOpportunity = new ClientOpportunity();
             	
+
             	clientOpportunity.setId(resultSet.getInt("c.id"));
             	clientOpportunity.setFirstName("c.firstname");
             	clientOpportunity.setLastName("c.lastname");

@@ -4,15 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+
+import edu.mum.mpp.zayagerman.businessLogic.ClientFactory;
 import edu.mum.mpp.zayagerman.dao.ClientLeadDAOImpl;
+import edu.mum.mpp.zayagerman.entity.Client;
+import edu.mum.mpp.zayagerman.entity.ClientData;
 import edu.mum.mpp.zayagerman.entity.ClientLead;
 import edu.mum.mpp.zayagerman.service.ClientLeadDAO;
+import edu.mum.mpp.zayagerman.settings.ClientType;
 
 /**
  * Servlet implementation class CreateClient
@@ -38,26 +44,17 @@ public class CreateClient extends HttpServlet {
 		
 		if(action.equals("listLeads")){
 			listLeads(request, response);
-
 		}
 		
 		//PrintWriter out = response.getWriter();
 		//out.println("TestServlet says hi<br/>");
 
-		//}
-
-
 		/*
 		 * Create Client information
 		 */
-		
-		//if(action.equals("createLead")){
-		//	createClient(request, response);
-			//}
-		
-		
-		
-		//return;
+		if(action.equals("createLead")){
+			createClient(request, response);
+		}
 	}
 	
 	private void listLeads(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,61 +62,36 @@ public class CreateClient extends HttpServlet {
 	    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
 	    
 	    /*
-	     * TEMPORAL
+	     * GET ALL CLIENTS
 	     */
 	    List<ClientLead> leads = new ArrayList<ClientLead>();
 	    leads = dao.getAllClientLeads();
-	    /*
-		leads.add(new ClientLead("German", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
-		leads.add(new ClientLead("Charlei", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
-		leads.add(new ClientLead("Zaya", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
-		leads.add(new ClientLead("Tom", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
-		leads.add(new ClientLead("John", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
-	    */
-	    /*
-	     * 
-	     */
 	    
 	    String json = new Gson().toJson(leads );
 	    response.getWriter().write("{ \"data\":"   + json + " }"); 
 	}
 	
 	private void createClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ClientData client = new ClientData();
-//		client.setClientFirstName(request.getParameter("clientFirstName"));
-//		client.setClientLastName(request.getParameter("clientLastName"));
-//		client.setClientEmail(request.getParameter("clientEmail"));
-//		
-//	//	client.setLeadAmount(3.0);
-//	//	//client.setLeadAmount(Double.parseDouble(request.getParameter("LeadAmount")));
-////		client.setLeadSource(request.getParameter("leadSource"));
-////		client.setLeadStatus(request.getParameter("leadStatus"));
-//		/*client.setLeadIndustry(request.getParameter("leadIndustry"));
-//		client.setLeadDescription(request.getParameter("leadDescription"));*/
-//		
-//		ClientService.createClient(ClientType.LEAD, client);
-//		
-//		//response.sendRedirect("modules/success.jsp");
-//		RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
-//		rd.forward(request, response);
+		/*
+		 * Retrieve object Client from de Factory
+		 */
+		ClientLead client = (ClientLead)ClientFactory.createClient(ClientType.LEAD);
+
+		client.setFirstName(request.getParameter("clientFirstName"));
+		client.setLastName(request.getParameter("clientLastName"));
+		client.setEmail(request.getParameter("clientEmail"));
 		
+		client.setAmount(Double.valueOf(request.getParameter("LeadAmount")));
+		client.setSource(request.getParameter("leadSource"));
+		client.setStatus(request.getParameter("leadStatus"));
+		client.setIndustry(request.getParameter("leadIndustry"));
+		client.setDescription(request.getParameter("leadDescription"));
 		
-	/*	 String userName = "dw";
-	        String password = "dw";
-	        String email = "dw";
-	        String phone = "dw";
-	        String city = "dw";
-	 
-	        HttpSession session = request.getSession(true);
-	       
-	        try {
-	            UserDAO userDAO = new UserDAO();
-	            userDAO.addUserDetails(userName, password, email, phone, city);
-	            response.sendRedirect("Success");
-	        } catch (Exception e) {
-	 
-	            e.printStackTrace();
-	        }*/
+		dao.addClientLead( client);
+		
+		//response.sendRedirect("modules/success.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
+		rd.forward(request, response);
 	}
 	
 	/**
@@ -127,19 +99,10 @@ public class CreateClient extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-//		
+		
 		if(action.equals("listLeads")){
 			listLeads(request, response);
 		}
-		
-//	    StudentDAO dao = new StudentController();
-//		 
-//	 	Student student = new Student();
-//        student.setFirstName("dw");
-//        student.setLastName("dw");
-//        student.setCourse("dw");
-//        student.setYear(12);
-//        
-//        dao.addStudent(student);	
+	
 	}
 }

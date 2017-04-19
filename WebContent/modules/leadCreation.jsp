@@ -14,7 +14,7 @@ $(document).ready(function() {
 	
         "ajax": '../CreateClient?action=listLeads',
         "columns": [
-        	{ "data": "ids" },
+        	{ "data": "id" },
             { "data": "firstName" },
             { "data": "lastName" },
             { "data": "email" },
