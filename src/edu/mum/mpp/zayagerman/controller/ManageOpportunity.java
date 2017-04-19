@@ -1,12 +1,11 @@
 package edu.mum.mpp.zayagerman.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -38,7 +37,7 @@ public class ManageOpportunity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ClientOpportunityDAO dao;
 	
-	ManageOpportunity(){
+	public ManageOpportunity(){
 		dao = new ClientOpportunityDAOImpl();
 	}
 	
@@ -87,19 +86,29 @@ public class ManageOpportunity extends HttpServlet {
 		client.setStage(request.getParameter("OpporStage"));
 		client.setAmount(Double.parseDouble(request.getParameter("OpporAmount")));
 		client.setProbability(Integer.parseInt(request.getParameter("OpporProbability")));
+		client.setDescription(request.getParameter("OpporDescription"));
 		/*
 		 * DATE TEMP
 		 */
+		
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-		Date closeDateOppor = (Date) formatter.parse(request.getParameter("OpporCloseDate"));
-		client.setCloseDate((java.sql.Date) closeDateOppor);
-		client.setDescription(request.getParameter("OpporDescription"));
+		
+		//Date closeDateOppor = (Date) formatter.parse(request.getParameter("OpporCloseDate"));
+		//client.setCloseDate((java.sql.Date) closeDateOppor);
+		
+		
+		//Calendar cal = Calendar.getInstance();
+				
+		//Date date2 = cal.getTime();
+		client.setCloseDate(null);
+		
+		
 
 		dao.addClientOpportunity(client);
 
-		// response.sendRedirect("modules/success.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
-		rd.forward(request, response);
+		 response.sendRedirect("modules/opportunityCreation.jsp");
+		//RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
+		//rd.forward(request, response);
 	}
 	
 	/**
@@ -111,6 +120,17 @@ public class ManageOpportunity extends HttpServlet {
 		String action = request.getParameter("action");
 		if (action.equals("list")) {
 			listOpportunities(request, response);
+		}
+		
+		/*
+		 * Create Client information
+		 */
+		if (action.equals("create")) {
+			try {
+				createOpportunity(request, response);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

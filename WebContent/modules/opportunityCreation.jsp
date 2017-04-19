@@ -19,7 +19,6 @@ $(document).ready(function() {
             { "data": "stage" },
             { "data": "amount" },
             { "data": "probability" },
-            { "data": "closeDate" },
             { "data": "description" }
             ],
             "columnDefs": [
@@ -39,7 +38,7 @@ $(document).ready(function() {
 			<div class="content_item">
 				<div style="width:600px; float:left;">
 				<br>
-				<form name="clientCreation" action="../CreateClient" method="post">
+				<form name="clientCreation" action="../ManageOpportunity" method="post">
 					<ul class="form-style-1">
 						<h3>Create New Opportunity</h3>
 						<li>
@@ -108,7 +107,6 @@ $(document).ready(function() {
 			                <th>Stage</th>
 			                <th>Amount</th>
 			                <th>Probability</th>
-			                <th>Close Date</th>
 			                <th>Description</th>
 			            </tr>
 			        </thead>
@@ -121,7 +119,6 @@ $(document).ready(function() {
 			                <th>Stage.</th>
 			                <th>Amount</th>
 			                <th>Probability</th>
-			                <th>Close Date</th>
 			                <th>Description</th>
 			            </tr>
 			        </tfoot>
