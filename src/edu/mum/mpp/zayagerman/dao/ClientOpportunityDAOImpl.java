@@ -88,7 +88,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
         try {
             Statement statement = conn.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from client_opportunity");
+            ResultSet resultSet = statement.executeQuery("select * from client_opportunity o left join client c on o.id_client = c.id");
             
             while( resultSet.next() ) {
             	ClientOpportunity clientOpportunity = new ClientOpportunity();
@@ -98,6 +98,10 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             	clientOpportunity.setProbability(resultSet.getInt("probability"));
             	clientOpportunity.setCloseDate(resultSet.getDate("closedDate"));
             	clientOpportunity.setDescription(resultSet.getString("description"));
+            	clientOpportunity.setFirstName(resultSet.getString("firstname"));
+            	clientOpportunity.setLastName(resultSet.getString("lastname"));
+            	clientOpportunity.setEmail(resultSet.getString("email"));
+            	
             	
                 System.out.println("New Client Opportunity Record: " + clientOpportunity.toString());
             	
