@@ -113,6 +113,7 @@ public class ManageSale extends HttpServlet {
 		/*
 		 * Temporal
 		 */
+		/*
 		ClientBasic client1 = new ClientBasic(1, "German", "Segura", " gsegura@gmail.com");
 		ClientBasic client2 = new ClientBasic(2, "John", "McQuin", " john@gmail.com");
 		ClientBasic client3 = new ClientBasic(3, "Bruce", "Lee", " lee@gmail.com");
@@ -131,9 +132,9 @@ public class ManageSale extends HttpServlet {
 		for(Sale s: listSales){
 			salesData.add(new dataGraphic(s.getTypeSale(), s.getAmount()));
 		}
-		
+		*/
 			
-		String json = new Gson().toJson(salesData);
+		String json = new Gson().toJson(null);
 		response.setContentType("application/json");
   	    response.getWriter().write(json);
   	    /*
@@ -163,10 +164,12 @@ public class ManageSale extends HttpServlet {
 		/*
 		 * Temporal
 		 */
+		/*
 		ClientBasic client1 = new ClientBasic(1, "German", "Segura", " gsegura@gmail.com");
 		ClientBasic client2 = new ClientBasic(2, "John", "McQuin", " john@gmail.com");
 		ClientBasic client3 = new ClientBasic(3, "Bruce", "Lee", " lee@gmail.com");
 		ClientBasic client4 = new ClientBasic(4, "Jet Li", "Segura", " jet@gmail.com");
+		*/
 		
 		LocalDate today = LocalDate.now();
 		List<Sale> listSales = new ArrayList<>();
@@ -185,21 +188,24 @@ public class ManageSale extends HttpServlet {
 		TypeSale typeNewSale = TypeSale.valueOf(request.getParameter("typeSale"));
 		Double amountNewSale = Double.valueOf(request.getParameter("OpporAmount"));
 		int idClient = Integer.valueOf(request.getParameter("idClient"));
-		
-		Sale sale = new Sale();/*
+		/*
+		Sale sale = new Sale();
 		sale.setTypeSale(typeNewSale);*/
 		//sale.setClientBasic(ClientService.getclient(idClient));
+		/*
 		sale.setAmount(amountNewSale);
+		
 		sale.setPercentGain(typeNewSale.percentage());
 		sale.setAmountGain(typeNewSale.percentage() * amountNewSale);
 		LocalDate today = LocalDate.now();
 		sale.setDateSale(today);
+		*/
 		
 		PrintWriter out = response.getWriter();
-		out.println(sale);
 		
 		
-		SalesService.createSale(idClient, sale);
+		
+		//SalesService.createSale(idClient, null);
 		
 		response.sendRedirect("modules/success.jsp");
 		RequestDispatcher rd = request.getRequestDispatcher("modules/saleCreation.jsp");
