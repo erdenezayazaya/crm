@@ -13,6 +13,7 @@ import edu.mum.mpp.zayagerman.settings.DBUtil;
 
 public class ClientLeadDAOImpl implements ClientLeadDAO{
 	private Connection conn;
+	private int clientId;
 	
     public ClientLeadDAOImpl() {
         conn = DBUtil.getConnection();
@@ -35,14 +36,13 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
 		        Statement statement = conn.createStatement();
 
 	            ResultSet resultSet = statement.executeQuery("select id from client order by id DESC limit 1");
-	            
-	            int clientId = 0;
-	            
+	         
 	            while( resultSet.next() ) {
-	            	clientId  = resultSet.getInt("c.id");
-		            resultSet.close();
-		            statement.close();	 
+	            	clientId  = resultSet.getInt("id");		        
 	            }
+	            
+	            resultSet.close();
+	            statement.close();	
 			  
 	            query = "insert into client_lead (id, source, status, amount, industry, description, id_client) values (?,?,?,?,?,?)";
 	           
