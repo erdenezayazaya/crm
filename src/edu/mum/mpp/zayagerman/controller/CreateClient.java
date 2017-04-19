@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import edu.mum.mpp.zayagerman.dao.ClientLeadDAOImpl;
 import edu.mum.mpp.zayagerman.dao.StudentController;
 import edu.mum.mpp.zayagerman.entity.ClientData;
 import edu.mum.mpp.zayagerman.entity.ClientLead;
@@ -24,6 +25,13 @@ import edu.mum.mpp.zayagerman.settings.ClientType;
  */
 @WebServlet(description = "Servlet for creating a client", urlPatterns = { "/CreateClient" })
 public class CreateClient extends HttpServlet {
+	
+	private ClientLeadDAOImpl dao;
+	
+	CreateClient(){
+		dao = new ClientLeadDAOImpl();
+	}
+	
 	private static final long serialVersionUID = 1L;
 
 		/**
@@ -66,6 +74,7 @@ public class CreateClient extends HttpServlet {
 	     * TEMPORAL
 	     */
 	    List<ClientLead> leads = new ArrayList<ClientLead>();
+	    leads = dao.getAllClientLeads();
 	    /*
 		leads.add(new ClientLead("German", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
 		leads.add(new ClientLead("Charlei", "Segura", " gsegura@gmail.com", "aa", "aa", 3.0, "a", "aa" ));
@@ -77,8 +86,8 @@ public class CreateClient extends HttpServlet {
 	     * 
 	     */
 	    
-//	    String json = new Gson().toJson(ClientService.getLeads() );
-//	    response.getWriter().write("{ \"data\":"   + json + " }"); 
+	    String json = new Gson().toJson(leads );
+	    response.getWriter().write("{ \"data\":"   + json + " }"); 
 	}
 	
 	private void createClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

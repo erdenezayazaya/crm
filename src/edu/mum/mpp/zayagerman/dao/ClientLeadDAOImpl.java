@@ -84,7 +84,7 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
         try {
             Statement statement = conn.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from client_lead");
+            ResultSet resultSet = statement.executeQuery("select * from client_lead l left join client c on l.id_client = c.id");
             
             while( resultSet.next() ) {
             	ClientLead clientLead = new ClientLead();
@@ -95,6 +95,11 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
             	clientLead.setIndustry(resultSet.getString("industry"));
             	clientLead.setSource(resultSet.getString("source"));
             	clientLead.setStatus(resultSet.getString("status"));
+            	clientLead.setId(resultSet.getInt("id_client"));
+            	clientLead.setFirstName(resultSet.getString("fistname"));
+            	clientLead.setLastName(resultSet.getString("lastname"));
+            	clientLead.setEmail(resultSet.getString("email"));
+            	
             	
             	clientLeadList.add(clientLead);
             	
