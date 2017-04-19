@@ -22,10 +22,12 @@ import com.google.gson.Gson;
 
 import edu.mum.mpp.zayagerman.settings.ClientType;
 import edu.mum.mpp.zayagerman.settings.TypeSale;
+import edu.mum.mpp.zayagerman.dao.SaleDAOImpl;
 import edu.mum.mpp.zayagerman.entity.Client;
 import edu.mum.mpp.zayagerman.entity.ClientBasic;
 import edu.mum.mpp.zayagerman.entity.ClientData;
 import edu.mum.mpp.zayagerman.entity.Sale;
+import edu.mum.mpp.zayagerman.service.SaleDAO;
 
 /**
  * Servlet implementation class ManageSale
@@ -33,7 +35,11 @@ import edu.mum.mpp.zayagerman.entity.Sale;
 @WebServlet("/ManageSale")
 public class ManageSale extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private SaleDAO dao;
+	
+	ManageSale(){
+		dao = new SaleDAOImpl();
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -188,9 +194,9 @@ public class ManageSale extends HttpServlet {
 		TypeSale typeNewSale = TypeSale.valueOf(request.getParameter("typeSale"));
 		Double amountNewSale = Double.valueOf(request.getParameter("OpporAmount"));
 		int idClient = Integer.valueOf(request.getParameter("idClient"));
-		/*
-		Sale sale = new Sale();
-		sale.setTypeSale(typeNewSale);*/
+		
+		
+		//dao.setTypeSale(typeNewSale);
 		//sale.setClientBasic(ClientService.getclient(idClient));
 		/*
 		sale.setAmount(amountNewSale);

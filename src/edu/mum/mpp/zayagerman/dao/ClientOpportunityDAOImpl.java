@@ -16,6 +16,7 @@ import edu.mum.mpp.zayagerman.settings.DBUtil;
 
 public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	private Connection conn;
+	int clientId;
 	
     public ClientOpportunityDAOImpl() {
         conn = DBUtil.getConnection();
@@ -29,9 +30,9 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 			 	
 			 	PreparedStatement preparedStatement = conn.prepareStatement(query);
 			 	
-	            preparedStatement.setString(2, clientOpportunity.getFirstName());
-		        preparedStatement.setString(3, clientOpportunity.getLastName());
-		        preparedStatement.setString(4, clientOpportunity.getEmail());
+	            preparedStatement.setString(1, clientOpportunity.getFirstName());
+		        preparedStatement.setString(2, clientOpportunity.getLastName());
+		        preparedStatement.setString(3, clientOpportunity.getEmail());
 			 
 	            preparedStatement.executeUpdate();
 	            	            
@@ -40,10 +41,10 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	            ResultSet resultSet = statement.executeQuery("select id from client order by id DESC limit 1");
 	            
 	            while( resultSet.next() ) {
-	            	int lastId = resultSet.getInt("c.id");
-	            	
-	            resultSet.close();
-	            statement.close();	            
+	            	this.clientId  = resultSet.getInt("c.id");
+		            resultSet.close();
+		            statement.close();	 
+	            }
 	            
 	            query = "insert into client_opportunity (amount, probability, "
 	            		+ "closedDate, description, id_client) values (?,?,?,?,?)";
@@ -54,8 +55,8 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	            preparedStatement.setInt(2, clientOpportunity.getProbability());
 	            preparedStatement.setDate(3, clientOpportunity.getCloseDate());
 	            preparedStatement.setString(4, clientOpportunity.getDescription());
-	            preparedStatement.setInt(5, lastId);
-	            }
+	            preparedStatement.setInt(5, this.clientId);
+	           
 	            
 	            preparedStatement.executeUpdate();
 	            preparedStatement.close();
