@@ -3,6 +3,7 @@ package edu.mum.mpp.zayagerman.entity;
 import java.sql.Date;
 
 public final class ClientOpportunity extends Client {
+	private int clientOpportunityId;
     private String stage;
     private double amount;
     private int probability;
@@ -59,5 +60,13 @@ public final class ClientOpportunity extends Client {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getClientOpportunityId() {
+		return clientOpportunityId;
+	}
+
+	public void setClientOpportunityId(int clientOpportunityId) {
+		this.clientOpportunityId = clientOpportunityId;
 	}
 }

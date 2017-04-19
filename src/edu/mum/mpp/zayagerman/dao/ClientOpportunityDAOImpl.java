@@ -24,18 +24,40 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	@Override
 	public void addClientOpportunity(ClientOpportunity clientOpportunity) {
 		 try {
-	            String query = "insert into client_opportunity (id, amount, probability, "
-	            		+ "closedDate, description) values (?,?,?,?,?)";
-	            
-	            PreparedStatement preparedStatement = conn.prepareStatement(query);
-	            
-	            preparedStatement.setInt(1, clientOpportunity.getId());
-	            preparedStatement.setDouble(2, clientOpportunity.getAmount());
-	            preparedStatement.setInt(3, clientOpportunity.getProbability());
-	            preparedStatement.setDate(4, clientOpportunity.getCloseDate());
-	            preparedStatement.setString(5, clientOpportunity.getDescription());
+			 	String query = "insert into client(firstname, lastname, email) "
+			 			+ "values (?,?,?)";
+			 	
+			 	PreparedStatement preparedStatement = conn.prepareStatement(query);
+			 	
+	            preparedStatement.setString(2, clientOpportunity.getFirstName());
+		        preparedStatement.setString(3, clientOpportunity.getLastName());
+		        preparedStatement.setString(4, clientOpportunity.getEmail());
+			 
 	            preparedStatement.executeUpdate();
+	            	            
+	            Statement statement = conn.createStatement();
+
+	            ResultSet resultSet = statement.executeQuery("select id from client order by id DESC limit 1");
 	            
+	            while( resultSet.next() ) {
+	            	int lastId = resultSet.getInt("c.id");
+	            	
+	            resultSet.close();
+	            statement.close();	            
+	            
+	            query = "insert into client_opportunity (amount, probability, "
+	            		+ "closedDate, description, id_client) values (?,?,?,?,?)";
+	            
+	            preparedStatement = conn.prepareStatement(query);
+	            
+	            preparedStatement.setDouble(1, clientOpportunity.getAmount());
+	            preparedStatement.setInt(2, clientOpportunity.getProbability());
+	            preparedStatement.setDate(3, clientOpportunity.getCloseDate());
+	            preparedStatement.setString(4, clientOpportunity.getDescription());
+	            preparedStatement.setInt(5, lastId);
+	            }
+	            
+	            preparedStatement.executeUpdate();
 	            preparedStatement.close();
 	            
 	            System.out.println("New Client Opportunity Record Addded: " + clientOpportunity.toString());
@@ -88,16 +110,23 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
         try {
             Statement statement = conn.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from client_opportunity");
+            ResultSet resultSet = statement.executeQuery("select * from client c inner "
+            		+ "join client_opportunity "
+            		+ "o on c.id = o.id_client");
             
             while( resultSet.next() ) {
             	ClientOpportunity clientOpportunity = new ClientOpportunity();
             	
-            	clientOpportunity.setId(resultSet.getInt("id"));
-            	clientOpportunity.setAmount(resultSet.getDouble("amount"));
-            	clientOpportunity.setProbability(resultSet.getInt("probability"));
-            	clientOpportunity.setCloseDate(resultSet.getDate("closedDate"));
-            	clientOpportunity.setDescription(resultSet.getString("description"));
+            	clientOpportunity.setId(resultSet.getInt("c.id"));
+            	clientOpportunity.setFirstName("c.firstname");
+            	clientOpportunity.setLastName("c.lastname");
+            	clientOpportunity.setEmail("c.email");
+            	            	
+            	clientOpportunity.setClientOpportunityId(resultSet.getInt("o.id"));
+            	clientOpportunity.setAmount(resultSet.getDouble("o.amount"));
+            	clientOpportunity.setProbability(resultSet.getInt("o.probability"));
+            	clientOpportunity.setCloseDate(resultSet.getDate("o.closedDate"));
+            	clientOpportunity.setDescription(resultSet.getString("o.description"));
             	
                 System.out.println("New Client Opportunity Record: " + clientOpportunity.toString());
             	
@@ -117,8 +146,10 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
         try {
         	
         	StringBuilder queryBuilder = new StringBuilder();
-        	queryBuilder.append("select * from client_opportunity ");
-        	queryBuilder.append("where id=?");
+        	queryBuilder.append("select * from client c inner ");
+        	queryBuilder.append("join client_opportunity ");
+        	queryBuilder.append("o on c.id = o.id_client ");
+        	queryBuilder.append("where id=? ");
         	
             PreparedStatement preparedStatement = conn.prepareStatement(queryBuilder.toString());
             preparedStatement.setInt(1, clientOpportunityId);
@@ -126,12 +157,17 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
    
-            	clientOpportunity.setId(resultSet.getInt("id"));
-            	clientOpportunity.setAmount(resultSet.getDouble("amount"));
-            	clientOpportunity.setProbability(resultSet.getInt("probability"));
-            	clientOpportunity.setCloseDate(resultSet.getDate("closedDate"));
-            	clientOpportunity.setDescription(resultSet.getString("description"));
-            	
+             	clientOpportunity.setId(resultSet.getInt("c.id"));
+            	clientOpportunity.setFirstName("c.firstname");
+            	clientOpportunity.setLastName("c.lastname");
+            	clientOpportunity.setEmail("c.email");
+            	            	
+            	clientOpportunity.setClientOpportunityId(resultSet.getInt("o.id"));
+            	clientOpportunity.setAmount(resultSet.getDouble("o.amount"));
+            	clientOpportunity.setProbability(resultSet.getInt("o.probability"));
+            	clientOpportunity.setCloseDate(resultSet.getDate("o.closedDate"));
+            	clientOpportunity.setDescription(resultSet.getString("o.description"));
+        
             	System.out.println("New ClientOpportunity Record: " + clientOpportunity.toString());
             }
             resultSet.close();

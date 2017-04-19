@@ -100,7 +100,6 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
             	clientLead.setLastName(resultSet.getString("lastname"));
             	clientLead.setEmail(resultSet.getString("email"));
             	
-            	
             	clientLeadList.add(clientLead);
             	
             	System.out.println("New Activity Record: " + clientLead.toString());

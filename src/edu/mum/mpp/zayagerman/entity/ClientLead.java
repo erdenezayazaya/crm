@@ -1,6 +1,7 @@
 package edu.mum.mpp.zayagerman.entity;
 
 public class ClientLead extends Client {
+	private int clientLeadId;
     private String source;
     private String status;
     private double amount;
@@ -60,5 +61,13 @@ public class ClientLead extends Client {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getClientLeadId() {
+		return clientLeadId;
+	}
+
+	public void setClientLeadId(int clientLeadId) {
+		this.clientLeadId = clientLeadId;
 	}
 }
