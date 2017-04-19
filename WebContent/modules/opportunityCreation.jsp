@@ -56,12 +56,12 @@ $(document).ready(function() {
 							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Probability:
 							</label> 
 							<select name="OpporStage">
-							  <option value="0">Prospecting</option>
-							  <option value="10">Need Analysis</option>
-							  <option value="20">Proposal</option>
-							  <option value="30">Negotiation</option>
-							  <option value="30">Closed Won</option>
-							  <option value="30">Closed Lost</option>
+							  <option value="PROSPECTING">Prospecting</option>
+							  <option value="NEEDS_ANALYSIS">Need Analysis</option>
+							  <option value="PROPOSAL">Proposal</option>
+							  <option value="NEGOTIATION">Negotiation</option>
+							  <option value="CLOSED_WON">Closed Won</option>
+							  <option value="CLOSED_LOST">Closed Lost</option>
 							  </select>
 							  &nbsp;&emsp;&emsp;
 							  <input class="" type="number" name="OpporAmount" min="1" max="1000000" required>

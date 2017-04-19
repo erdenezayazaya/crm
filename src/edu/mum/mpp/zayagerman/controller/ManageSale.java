@@ -116,17 +116,7 @@ public class ManageSale extends HttpServlet {
 	}
 	
 	private void dataGraphicSale(HttpServletRequest request, HttpServletResponse response) throws IOException{
-
-		List<Sale> listSales = new ArrayList<>();
-		listSales = dao.getAllSales();
-		
-		
-		List<dataGraphic> salesData = new ArrayList<>();
-		for(Sale s: listSales){
-			salesData.add(new dataGraphic(s.getTypeSale().getFullName(), s.getAmount()));
-		}
-		
-		String json = new Gson().toJson(salesData);
+		String json = new Gson().toJson(dao.dataGraphicSales());
 		response.setContentType("application/json");
 		response.getWriter().write(json);
 		//response.getWriter().write("{ \"data\":" + json + " }");

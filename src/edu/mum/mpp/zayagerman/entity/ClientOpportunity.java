@@ -70,3 +70,5 @@ public final class ClientOpportunity extends Client {
 		this.clientOpportunityId = clientOpportunityId;
 	}
 }
+
+

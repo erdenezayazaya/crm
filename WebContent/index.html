@@ -22,7 +22,10 @@
      
    // Set a callback to run when the Google Visualization API is loaded.
    google.charts.setOnLoadCallback(drawChart);
-      
+   
+   /***************************
+    * Sales
+    ***************************/  
     function drawChart() {
       var jsonData = $.ajax({
           url: "ManageSale?action=dataGraphic",
@@ -30,9 +33,6 @@
           async: false
           }).responseText;
           
-      // Create our data table out of JSON data loaded from server.
-      //var data = new google.visualization.DataTable();
-      //var dataArray = [];
       
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'InsuranceType');
@@ -45,37 +45,49 @@
       });
 
       data.addRows(dataArray);
-
-      
+      var options1 = {
+              title: 'Total Sales by Insurance Type',
+              'width':600,
+              'height':400
+            };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.PieChart(document.getElementById('sale_chart'));
-      chart.draw(data, {width: 400, height: 240});
+      chart.draw(data, options1);
       
-      //Opportunities
-      var data = google.visualization.arrayToDataTable([
-          ['Type', 'Amount'],
-          ['Prospecting', 10],
-          ['Need Analysis', 2],
-          ['Proposal', 1],
-          ['Negotiation', 13],
-          ['Closed Won', 20],
-          ['Closed Lost', 2]
-        ]);
+      /***************************
+      * Opportunities
+      ***************************/
+      var jsonData = $.ajax({
+          url: "ManageOpportunity?action=dataGraphic",
+          dataType: "json",
+          async: false
+          }).responseText;
+      
+      var data2 = new google.visualization.DataTable();
+      data2.addColumn('string', 'Stage');
+      data2.addColumn('number', 'Total');
+    
+      /* for loop code for changing inputdata to 'data' of type google.visualization.DataTable*/
+      var dataArray2 = [];
+      $.each($.parseJSON(jsonData), function (i, obj) {
+       dataArray2.push([obj.type, obj.amount]);
+      });
 
+      data2.addRows(dataArray2);
         var options = {
-          title: 'Population of Largest U.S. Cities',
-          chartArea: {width: '50%'},
+          title: 'Opportunities by Stage',
+          chartArea: {width: '70%'},
           isStacked: true,
           hAxis: {
-            title: 'Total Population',
+            title: 'Total',
             minValue: 0,
           },
           vAxis: {
-            title: 'City'
+            title: 'Stage'
           }
         };
         var chart = new google.visualization.BarChart(document.getElementById('oppor_chart'));
-        chart.draw(data, options);
+        chart.draw(data2, options);
     }
 </script>
 
@@ -93,7 +105,7 @@
             <li><a href="modules/opportunityCreation.jsp">Opportunities</a></li>
             <li><a href="#">Activities</a></li>
             <li><a href="modules/salesCreation.jsp">Sales</a></li>
-            <li class="last"><a href="contact.html">Campaigns</a></li>
+            <li><a href="contact.html">Campaigns</a></li>
 
           </ul>
         </div>
@@ -104,19 +116,10 @@
         <div class="content_item">
           <div style="width:600px; float:left;">
       <h1>Sales </h1>
-        <p>Sales in the current Period.</p>
-		
 		<div id="sale_chart" align="center"></div>
-		
-		
 		<h1>Opportunities </h1>
-        <p>Current Opportunities in the current Period.</p>
-		
 		<div id="oppor_chart" align="center"></div>
 		</div>
-
-
-
       </div>
           <div style="width:250px; float:left; margin-left:20px;">
             <div style="width:200px; float:left;"><h2>Latest Update</h2></div>

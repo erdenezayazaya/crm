@@ -10,9 +10,11 @@ import java.util.List;
 
 import edu.mum.mpp.zayagerman.entity.Activity;
 import edu.mum.mpp.zayagerman.entity.Client;
+import edu.mum.mpp.zayagerman.entity.DataGraphicOppo;
 import edu.mum.mpp.zayagerman.entity.Sale;
 import edu.mum.mpp.zayagerman.service.SaleDAO;
 import edu.mum.mpp.zayagerman.settings.DBUtil;
+import edu.mum.mpp.zayagerman.settings.Stage;
 import edu.mum.mpp.zayagerman.settings.TypeSale;
 
 public class SaleDAOImpl implements SaleDAO{
@@ -174,6 +176,28 @@ public class SaleDAOImpl implements SaleDAO{
             e.printStackTrace();
         }
         return sale;
+	}
+
+	@Override
+	public List<DataGraphicOppo> dataGraphicSales() {
+		List<DataGraphicOppo> list = new ArrayList<>();
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement
+					.executeQuery("select typeSale, count(*) total from sale group by typeSale");
+
+			while (resultSet.next()) {
+				list.add(new DataGraphicOppo(TypeSale.valueOf(resultSet.getString("typeSale")).getFullName(),
+						resultSet.getInt("total")));
+			}
+			resultSet.close();
+			statement.close();
+		} catch (
+
+		SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }

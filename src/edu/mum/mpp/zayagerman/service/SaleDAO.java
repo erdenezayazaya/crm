@@ -2,6 +2,7 @@ package edu.mum.mpp.zayagerman.service;
 
 import java.util.List;
 
+import edu.mum.mpp.zayagerman.entity.DataGraphicOppo;
 import edu.mum.mpp.zayagerman.entity.Sale;
 
 public interface SaleDAO {
@@ -10,4 +11,5 @@ public interface SaleDAO {
     public void updateSale(Sale sale);
     public List<Sale> getAllSales();
     public Sale getSaleById(int saleId);
+    public List<DataGraphicOppo> dataGraphicSales();
 }

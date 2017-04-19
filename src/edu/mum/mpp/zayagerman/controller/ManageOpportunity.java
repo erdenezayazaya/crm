@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import edu.mum.mpp.zayagerman.businessLogic.ClientFactory;
+import edu.mum.mpp.zayagerman.controller.ManageSale.dataGraphic;
 import edu.mum.mpp.zayagerman.dao.ClientOpportunityDAOImpl;
 import edu.mum.mpp.zayagerman.entity.ClientBasic;
 import edu.mum.mpp.zayagerman.entity.ClientData;
@@ -53,6 +55,10 @@ public class ManageOpportunity extends HttpServlet {
 		if (action.equals("list")) {
 			listOpportunities(request, response);
 		}
+		
+		if (action.equals("dataGraphic")) {
+			listDataGraphic(request, response);
+		}
 
 		/*
 		 * Create Client information
@@ -74,6 +80,18 @@ public class ManageOpportunity extends HttpServlet {
 		List<ClientOpportunity> listOppor = dao.getAllClientOpportunitys();
 		String json = new Gson().toJson(listOppor);
 		response.getWriter().write("{ \"data\":" + json + " }");
+	}
+	
+	
+	private void listDataGraphic(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+
+
+		String json = new Gson().toJson(dao.listOpporByStage());
+		response.setContentType("application/json");
+		response.getWriter().write(json);
 	}
 
 	private void createOpportunity(HttpServletRequest request, HttpServletResponse response)
@@ -131,6 +149,10 @@ public class ManageOpportunity extends HttpServlet {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+		}
+		
+		if (action.equals("dataGraphic")) {
+			listDataGraphic(request, response);
 		}
 	}
 
