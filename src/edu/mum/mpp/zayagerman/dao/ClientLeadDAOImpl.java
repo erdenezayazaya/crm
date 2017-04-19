@@ -21,9 +21,32 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
 	@Override
 	public void addClientLead(ClientLead clientLead) {
 		  try {
-	            String query = "insert into client_lead (id, source, status, amount, industry, description) values (?,?,?,?,?,?)";
+			  	String query = "insert into client(firstname, lastname, email) "
+			 			+ "values (?,?,?)";
+			 	
+			 	PreparedStatement preparedStatement = conn.prepareStatement(query);
+			 	
+	            preparedStatement.setString(1, clientLead.getFirstName());
+		        preparedStatement.setString(2, clientLead.getLastName());
+		        preparedStatement.setString(3, clientLead.getEmail());
+			  	
+		        preparedStatement.executeUpdate();
+		        
+		        Statement statement = conn.createStatement();
+
+	            ResultSet resultSet = statement.executeQuery("select id from client order by id DESC limit 1");
+	            
+	            int clientId = 0;
+	            
+	            while( resultSet.next() ) {
+	            	clientId  = resultSet.getInt("c.id");
+		            resultSet.close();
+		            statement.close();	 
+	            }
+			  
+	            query = "insert into client_lead (id, source, status, amount, industry, description, id_client) values (?,?,?,?,?,?)";
 	           
-	            PreparedStatement preparedStatement = conn.prepareStatement(query);
+	            preparedStatement = conn.prepareStatement(query);
 	            
 	            preparedStatement.setInt(1, clientLead.getId());
 	            preparedStatement.setString(2, clientLead.getSource());
@@ -31,6 +54,7 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
 	            preparedStatement.setDouble(4, clientLead.getAmount());
 	            preparedStatement.setString(5, clientLead.getIndustry());
 	            preparedStatement.setString(6, clientLead.getDescription());
+	            preparedStatement.setInt(7, clientId);
 	            
 	            preparedStatement.executeUpdate();
 	            preparedStatement.close();
@@ -89,16 +113,17 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
             while( resultSet.next() ) {
             	ClientLead clientLead = new ClientLead();
                      	
-            	clientLead.setId(resultSet.getInt("id"));
-            	clientLead.setAmount(resultSet.getDouble("amount"));
-            	clientLead.setDescription(resultSet.getString("description"));
-            	clientLead.setIndustry(resultSet.getString("industry"));
-            	clientLead.setSource(resultSet.getString("source"));
-            	clientLead.setStatus(resultSet.getString("status"));
-            	clientLead.setId(resultSet.getInt("id_client"));
-            	clientLead.setFirstName(resultSet.getString("firstname"));
-            	clientLead.setLastName(resultSet.getString("lastname"));
-            	clientLead.setEmail(resultSet.getString("email"));
+            	clientLead.setClientLeadId(resultSet.getInt("l.id"));
+            	clientLead.setAmount(resultSet.getDouble("l.amount"));
+            	clientLead.setDescription(resultSet.getString("l.description"));
+            	clientLead.setIndustry(resultSet.getString("l.industry"));
+            	clientLead.setSource(resultSet.getString("l.source"));
+            	clientLead.setStatus(resultSet.getString("l.status"));            	
+            	
+            	clientLead.setId(resultSet.getInt("c.id"));
+            	clientLead.setFirstName(resultSet.getString("c.firstname"));
+            	clientLead.setLastName(resultSet.getString("c.lastname"));
+            	clientLead.setEmail(resultSet.getString("c.email"));
             	
             	clientLeadList.add(clientLead);
             	
@@ -118,21 +143,26 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
         try {
         	
         	StringBuilder queryBuilder = new StringBuilder();
-        	queryBuilder.append("select * from client_lead ");
-        	queryBuilder.append("where id=?");
+        	queryBuilder.append("select * from client_lead l left join client c on l.id_client = c.id ");
+        	queryBuilder.append("where l.id=?");
         	
             PreparedStatement preparedStatement = conn.prepareStatement(queryBuilder.toString());
             preparedStatement.setInt(1, clientLeadId);
             
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
+            	
+            	clientLead.setId(resultSet.getInt("c.id"));
+            	clientLead.setFirstName(resultSet.getString("c.firstname"));
+            	clientLead.setLastName(resultSet.getString("c.lastName"));
+            	clientLead.setEmail(resultSet.getString("c.email"));
 
-            	clientLead.setId(resultSet.getInt("id"));
-            	clientLead.setAmount(resultSet.getDouble("amount"));
-            	clientLead.setDescription(resultSet.getString("description"));
-            	clientLead.setIndustry(resultSet.getString("industry"));
-            	clientLead.setSource(resultSet.getString("source"));
-            	clientLead.setStatus(resultSet.getString("status"));
+            	clientLead.setClientLeadId(resultSet.getInt("l.id"));
+            	clientLead.setAmount(resultSet.getDouble("l.amount"));
+            	clientLead.setDescription(resultSet.getString("l.description"));
+            	clientLead.setIndustry(resultSet.getString("l.industry"));
+            	clientLead.setSource(resultSet.getString("l.source"));
+            	clientLead.setStatus(resultSet.getString("l.status"));
             	
             	System.out.println("New Activity Record: " + clientLead.toString());
             }
