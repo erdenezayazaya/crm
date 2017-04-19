@@ -96,7 +96,7 @@ public class ClientLeadDAOImpl implements ClientLeadDAO{
             	clientLead.setSource(resultSet.getString("source"));
             	clientLead.setStatus(resultSet.getString("status"));
             	clientLead.setId(resultSet.getInt("id_client"));
-            	clientLead.setFirstName(resultSet.getString("fistname"));
+            	clientLead.setFirstName(resultSet.getString("firstname"));
             	clientLead.setLastName(resultSet.getString("lastname"));
             	clientLead.setEmail(resultSet.getString("email"));
             	

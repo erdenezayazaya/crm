@@ -9,15 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import com.google.gson.Gson;
 
 import edu.mum.mpp.zayagerman.dao.ClientLeadDAOImpl;
-import edu.mum.mpp.zayagerman.entity.ClientData;
 import edu.mum.mpp.zayagerman.entity.ClientLead;
-
-import edu.mum.mpp.zayagerman.settings.ClientType;
+import edu.mum.mpp.zayagerman.service.ClientLeadDAO;
 
 /**
  * Servlet implementation class CreateClient
@@ -25,9 +23,9 @@ import edu.mum.mpp.zayagerman.settings.ClientType;
 @WebServlet(description = "Servlet for creating a client", urlPatterns = { "/CreateClient" })
 public class CreateClient extends HttpServlet {
 	
-	private ClientLeadDAOImpl dao;
+	private ClientLeadDAO dao;
 	
-	CreateClient(){
+	public CreateClient(){
 		dao = new ClientLeadDAOImpl();
 	}
 	
@@ -41,10 +39,10 @@ public class CreateClient extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		/*if(action.equals("listLeads")){
+		if(action.equals("listLeads")){
 			listLeads(request, response);
 
-		}*/
+		}
 		
 		//PrintWriter out = response.getWriter();
 		//out.println("TestServlet says hi<br/>");
@@ -131,11 +129,11 @@ public class CreateClient extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String action = request.getParameter("action");
+		String action = request.getParameter("action");
 //		
-//		if(action.equals("listLeads")){
-//			listLeads(request, response);
-//		}
+		if(action.equals("listLeads")){
+			listLeads(request, response);
+		}
 		
 //	    StudentDAO dao = new StudentController();
 //		 
