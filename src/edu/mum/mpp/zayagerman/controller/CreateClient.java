@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -89,7 +90,9 @@ public class CreateClient extends HttpServlet {
 		
 		dao.addClientLead( client);
 		
-		response.sendRedirect("modules/success.jsp");
+		//response.sendRedirect("modules/success.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
+		rd.forward(request, response);
 	}
 	
 	/**
