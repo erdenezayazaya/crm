@@ -125,7 +125,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             	clientOpportunity.setLastName("c.lastname");
             	clientOpportunity.setEmail("c.email");
             	            	
-            	clientOpportunity.setClientOpportunityId(resultSet.getInt("o.id"));
+            	clientOpportunity.setId(resultSet.getInt("o.id"));
             	clientOpportunity.setAmount(resultSet.getDouble("o.amount"));
             	clientOpportunity.setProbability(resultSet.getInt("o.probability"));
             	clientOpportunity.setCloseDate(resultSet.getDate("o.closedDate"));
@@ -165,7 +165,7 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             	clientOpportunity.setLastName("c.lastname");
             	clientOpportunity.setEmail("c.email");
             	            	
-            	clientOpportunity.setClientOpportunityId(resultSet.getInt("o.id"));
+            	clientOpportunity.setId(resultSet.getInt("o.id"));
             	clientOpportunity.setAmount(resultSet.getDouble("o.amount"));
             	clientOpportunity.setProbability(resultSet.getInt("o.probability"));
             	clientOpportunity.setCloseDate(resultSet.getDate("o.closedDate"));
