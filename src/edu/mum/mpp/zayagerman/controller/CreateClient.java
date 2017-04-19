@@ -81,7 +81,7 @@ public class CreateClient extends HttpServlet {
 		client.setLastName(request.getParameter("clientLastName"));
 		client.setEmail(request.getParameter("clientEmail"));
 		
-		client.setAmount(Double.valueOf(request.getParameter("LeadAmount")));
+		client.setAmount(Double.valueOf(request.getParameter("leadAmount")));
 		client.setSource(request.getParameter("leadSource"));
 		client.setStatus(request.getParameter("leadStatus"));
 		client.setIndustry(request.getParameter("leadIndustry"));
@@ -89,9 +89,9 @@ public class CreateClient extends HttpServlet {
 		
 		dao.addClientLead( client);
 		
-		//response.sendRedirect("modules/success.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("modules/leadCreation.jsp");
+		//RequestDispatcher rd = request.getRequestDispatcher("modules/leadCreation.jspmodules/leadCreation.jsp");
+		//rd.forward(request, response);
 	}
 	
 	/**

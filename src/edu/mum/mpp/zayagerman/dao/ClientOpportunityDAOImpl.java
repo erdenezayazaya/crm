@@ -43,13 +43,13 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	            int clientId = 0;
 	            
 	            while( resultSet.next() ) {
-	            	clientId  = resultSet.getInt("c.id");
-		            resultSet.close();
-		            statement.close();	 
+	            	this.clientId  = resultSet.getInt("id");
 	            }
+	            resultSet.close();
+	            statement.close();
 	            
 	            query = "insert into client_opportunity (amount, probability, "
-	            		+ "closedDate, description, id_client) values (?,?,?,?,?)";
+	            		+ "closedDate, description, id_client, stage) values (?,?,?,?,?,?)";
 	            
 	            preparedStatement = conn.prepareStatement(query);
 	            
@@ -57,8 +57,8 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
 	            preparedStatement.setInt(2, clientOpportunity.getProbability());
 	            preparedStatement.setDate(3, clientOpportunity.getCloseDate());
 	            preparedStatement.setString(4, clientOpportunity.getDescription());
-	            preparedStatement.setInt(5, clientId);
-	           
+	            preparedStatement.setInt(5, this.clientId);
+	            preparedStatement.setString(6, clientOpportunity.getStage());
 	            
 	            preparedStatement.executeUpdate();
 	            preparedStatement.close();
@@ -120,17 +120,20 @@ public class ClientOpportunityDAOImpl implements ClientOpportunityDAO{
             
             while( resultSet.next() ) {
             	ClientOpportunity clientOpportunity = new ClientOpportunity();
-            	
-            	clientOpportunity.setId(resultSet.getInt("c.id"));
-            	clientOpportunity.setFirstName("c.firstname");
-            	clientOpportunity.setLastName("c.lastname");
-            	clientOpportunity.setEmail("c.email");
+
+            	clientOpportunity.setId(resultSet.getInt("id"));
+            	clientOpportunity.setFirstName(resultSet.getString("firstName"));
+            	clientOpportunity.setLastName(resultSet.getString("lastName"));
+            	clientOpportunity.setEmail(resultSet.getString("email"));
             	            	
-            	clientOpportunity.setId(resultSet.getInt("o.id"));
-            	clientOpportunity.setAmount(resultSet.getDouble("o.amount"));
-            	clientOpportunity.setProbability(resultSet.getInt("o.probability"));
-            	clientOpportunity.setCloseDate(resultSet.getDate("o.closedDate"));
-            	clientOpportunity.setDescription(resultSet.getString("o.description"));
+            	clientOpportunity.setId(resultSet.getInt("id"));
+            	clientOpportunity.setStage(resultSet.getString("stage"));
+            	clientOpportunity.setAmount(resultSet.getDouble("amount"));
+            	clientOpportunity.setProbability(resultSet.getInt("probability"));
+            	clientOpportunity.setCloseDate(resultSet.getDate("closedDate"));
+            	clientOpportunity.setDescription(resultSet.getString("description"));
+            	clientOpportunity.setStage(resultSet.getString("stage"));
+            	
             	
                 System.out.println("New Client Opportunity Record: " + clientOpportunity.toString());
             	
